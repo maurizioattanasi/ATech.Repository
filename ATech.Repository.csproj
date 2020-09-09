@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <Author>Maurizio Attanasi</Author>
+    <Version>1.0.0</Version>
+    <Description>A generic implementation for the repository pattern in C#</Description>
+    <PackageReleaseNotes>Added CronJob IHostedService support</PackageReleaseNotes>
+    <Copyright>Maurizio Attanasi</Copyright>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.8" />
+  </ItemGroup>
+
+</Project>
