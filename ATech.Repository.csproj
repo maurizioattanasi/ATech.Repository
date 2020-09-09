@@ -2,10 +2,11 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
-    <Author>Maurizio Attanasi</Author>
-    <Version>1.0.1</Version>
+    <Authors>Maurizio Attanasi</Authors>
+    <Version>1.0.2</Version>
     <Description>A generic implementation for the repository pattern in C#</Description>
-    <PackageReleaseNotes>First test with GitHub Actions</PackageReleaseNotes>
+    <PackageReleaseNotes>Package metadata fix</PackageReleaseNotes>
+    <PackageProjectUrl>https://github.com/maurizioattanasi/ATech.Repository</PackageProjectUrl>
     <Copyright>Maurizio Attanasi</Copyright>
   </PropertyGroup>
 
