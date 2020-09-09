@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
     <Author>Maurizio Attanasi</Author>
-    <Version>1.0.0</Version>
+    <Version>1.0.1</Version>
     <Description>A generic implementation for the repository pattern in C#</Description>
     <PackageReleaseNotes>First test with GitHub Actions</PackageReleaseNotes>
     <Copyright>Maurizio Attanasi</Copyright>
