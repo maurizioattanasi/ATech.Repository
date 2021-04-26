@@ -1,7 +1,24 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
+
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <Authors>Maurizio Attanasi</Authors>
+    <Version>1.0.0</Version>
+    <Description>Dapper implementation for the repository pattern</Description>
+    <PackageReleaseNotes>New version for actions</PackageReleaseNotes>
+    <PackageProjectUrl>https://github.com/maurizioattanasi/ATech.Repository</PackageProjectUrl>
+    <Copyright>Maurizio Attanasi</Copyright>
   </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ATech.Repository\ATech.Repository.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Dapper" Version="2.0.78" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.2" />
+  </ItemGroup>
+
 
 </Project>
