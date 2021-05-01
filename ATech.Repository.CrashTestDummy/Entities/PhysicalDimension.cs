@@ -8,7 +8,7 @@ namespace ATech.Repository.CrashTestDummy.Entities
 
         public string Name { get; set; }
 
-        public string Unit { get; set; }
+        public string Scale { get; set; }
 
         public DateTime Created { get; set; }
 

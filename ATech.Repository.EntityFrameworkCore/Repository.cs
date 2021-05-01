@@ -28,7 +28,6 @@ namespace ATech.Repository.EntityFrameworkCore
 
         public virtual IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> predicate) => this.Context.Set<TEntity>().Where(predicate);
 
-
         public Task<List<TEntity>> FindAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken) => this.Context.Set<TEntity>()
                 .Where(predicate)
                 .ToListAsync(cancellationToken);

@@ -5,12 +5,15 @@ using Microsoft.Extensions.Hosting;
 using Serilog;
 using System.Globalization;
 using System.Threading;
+using System.Data.SqlClient;
 
 namespace ATech.Repository.CrashTestDummy
 {
     public class Program
     {
         public static IConfiguration Configuration { get; private set; }
+
+        public static SqlConnection Connection { get; private set; }
 
         public static void Main(string[] args)
         {
@@ -54,9 +57,9 @@ namespace ATech.Repository.CrashTestDummy
             Host.CreateDefaultBuilder(args)
                 .ConfigureServices((hostContext, services) =>
                 {
-                     var connectionString = Configuration.GetConnectionString("IoTDataMartDb");
-
-                     Log.Information(connectionString);
+                    var connectionString = Configuration.GetConnectionString("IoTDataMartDb");
+                    Connection = new SqlConnection(connectionString);
+                    services.AddSingleton(Connection);
 
                     services.AddHostedService<Worker>();
                 })

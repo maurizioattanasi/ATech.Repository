@@ -19,4 +19,9 @@
     <PackageReference Include="Serilog.Sinks.RollingFile" Version="3.3.0" />    
     <PackageReference Include="System.Data.SqlClient" Version="4.8.2" />
   </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ATech.Repository\ATech.Repository.csproj" />
+    <ProjectReference Include="..\ATech.Repository.Dapper\ATech.Repository.Dapper.csproj" />
+  </ItemGroup>
 </Project>

@@ -11,8 +11,11 @@ namespace ATech.Repository.CrashTestDummy.Entities
         public string Make { get; set; }
 
         public string Model { get; set; }
+        
+        public string SerialNumber { get; set; }
 
         public short PhysicalDimensionId { get; set; }
+        public PhysicalDimension PhysicalDimension { get; set; }
 
         public DateTime Created { get; set; }
 
