@@ -37,8 +37,6 @@ namespace ATech.Repository.CrashTestDummy
                     .ReadFrom.Configuration(Configuration)
                     .CreateLogger();
 
-                // Configuration.GetSection("ServiceConfiguration").Bind(ServiceConfiguration);
-
                 CreateHostBuilder(args).Build().Run();
             }
             catch (Exception ex)
@@ -56,6 +54,10 @@ namespace ATech.Repository.CrashTestDummy
             Host.CreateDefaultBuilder(args)
                 .ConfigureServices((hostContext, services) =>
                 {
+                     var connectionString = Configuration.GetConnectionString("IoTDataMartDb");
+
+                     Log.Information(connectionString);
+
                     services.AddHostedService<Worker>();
                 })
                 .UseSerilog();

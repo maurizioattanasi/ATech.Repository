@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.SqlClient;
 using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
@@ -22,23 +21,8 @@ namespace ATech.Repository.Dapper
             }
         }
 
-        public SqlConnection Connection
-        {
-            get
-            {
-                SqlConnection connection = new SqlConnection(this.connection.ConnectionString);
-                connection.Open();
-                return connection;
-            }
-        }
-
         public void Add(TEntity entity)
         {
-            using (var connection = this.Connection)
-            {
-
-            }
-
             throw new NotImplementedException();
         }
 
