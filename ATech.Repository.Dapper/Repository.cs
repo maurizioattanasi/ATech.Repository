@@ -1,18 +1,20 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq.Expressions;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using ATech.Repository.Dapper.Extensions;
 
 namespace ATech.Repository.Dapper
 {
+    #pragma warning disable CS1591
     public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
     {
         private readonly IDbConnection connection;
 
-        public Repository(IDbConnection connection) => this.connection = connection ?? throw new ArgumentNullException(nameof(connection));
+        public Repository(IDbConnection connection) 
+            => this.connection = connection ?? throw new ArgumentNullException(nameof(connection));
 
         public void Add(TEntity entity) 
             => connection.Insert<TEntity>(entity);
@@ -31,17 +33,11 @@ namespace ATech.Repository.Dapper
             }
         }
 
-        public int Count() => connection.Count<TEntity>();
+        public int Count() 
+            => connection.Count<TEntity>();
 
-        public IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> predicate)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<List<TEntity>> FindAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken)
-        {
-            throw new NotImplementedException();
-        }
+        public IEnumerable<TEntity> Find(Func<TEntity, bool> predicate) 
+            => connection.Find<TEntity>(predicate);
 
         public TEntity Get(int id) 
             => connection.Get<TEntity>(id);
@@ -75,4 +71,5 @@ namespace ATech.Repository.Dapper
             }
         }
     }
+    #pragma warning restore CS1591
 }

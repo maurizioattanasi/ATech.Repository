@@ -1,12 +1,11 @@
 using System;
 using System.Collections.Generic;
-using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace ATech.Repository
 {
-  public interface IRepository<TEntity> where TEntity : class
+    public interface IRepository<TEntity> where TEntity : class
     {
         TEntity Get(int id);
         Task<TEntity> GetAsync(int id, CancellationToken cancellationToken);
@@ -17,9 +16,7 @@ namespace ATech.Repository
         IEnumerable<TEntity> GetAll();
         Task<IEnumerable<TEntity>> GetAllAsync(CancellationToken cancellationToken);
 
-        IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> predicate);
-
-        Task<List<TEntity>> FindAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken);
+        IEnumerable<TEntity> Find(Func<TEntity, bool> predicate);
 
         void Add(TEntity entity);
         Task AddAsync(TEntity entity, CancellationToken cancellationToken);

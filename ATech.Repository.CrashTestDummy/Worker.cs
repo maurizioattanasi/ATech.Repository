@@ -68,7 +68,8 @@ namespace ATech.Repository.CrashTestDummy
             if (dimensions != null)
             {
                 _logger.LogInformation("Found {count} physical dimensions", dimensions.Count());
-                foreach (var d in dimensions){
+                foreach (var d in dimensions)
+                {
                     _logger.LogInformation("Removing {dimension}", JsonSerializer.Serialize(d));
                     unitOfWork
                         .PhysicalDimensions
@@ -85,6 +86,8 @@ namespace ATech.Repository.CrashTestDummy
                     Created = DateTime.UtcNow,
                     CreatedBy = "atech"
                 });
+
+            var dimension = unitOfWork.PhysicalDimensions.Find(d => d.Name.ToLower() == "humidity").FirstOrDefault();
 
             dimensions = await unitOfWork
                 .PhysicalDimensions
