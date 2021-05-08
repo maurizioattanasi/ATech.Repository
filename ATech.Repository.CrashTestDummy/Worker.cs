@@ -1,5 +1,5 @@
 using System;
-using System.Data.SqlClient;
+using System.Data;
 using System.Linq;
 using System.Text.Json;
 using System.Threading;
@@ -12,11 +12,11 @@ namespace ATech.Repository.CrashTestDummy
 {
     public class Worker : IHostedService, IDisposable
     {
-        private SqlConnection connection;
+        private IDbConnection connection;
         private readonly ILogger<Worker> _logger;
         private bool disposed = false;
 
-        public Worker(SqlConnection connection,
+        public Worker(IDbConnection connection,
             ILogger<Worker> logger)
         {
             this.connection = connection ?? throw new ArgumentNullException(nameof(connection));
@@ -37,14 +37,6 @@ namespace ATech.Repository.CrashTestDummy
                 .Count();
 
             _logger.LogInformation("There are {count} sensors", count);
-
-            var sensor = await unitOfWork
-                .Sensors
-                .GetAsync(1, cancellationToken)
-                .ConfigureAwait(false);
-
-            if (sensor != null)
-                _logger.LogInformation("Sensor found {sensor}", JsonSerializer.Serialize(sensor));
 
             var sensors = await unitOfWork
                 .Sensors

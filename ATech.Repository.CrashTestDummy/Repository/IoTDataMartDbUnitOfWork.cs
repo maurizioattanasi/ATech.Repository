@@ -1,20 +1,24 @@
 using System;
+using System.Data;
 using System.Data.SqlClient;
-using System.Threading;
-using System.Threading.Tasks;
+using Microsoft.Data.Sqlite;
 
 namespace ATech.Repository.CrashTestDummy.Repository
 {
     public class IoTDataMartDbUnitOfWork : IIoTDataMartDbUnitOfWork
     {
-        private readonly SqlConnection connection;
-        
-        public IoTDataMartDbUnitOfWork(ref SqlConnection connection)
+        private readonly IDbConnection connection;
+
+        public IoTDataMartDbUnitOfWork(ref IDbConnection connection)
         {
-            if(connection is null)
+            if (connection is null)
                 throw new ArgumentNullException(nameof(connection));
 
-            this.connection = new SqlConnection(connection.ConnectionString);
+            if (connection is SqlConnection)
+                this.connection = new SqlConnection(connection.ConnectionString);
+            else
+                this.connection = new SqliteConnection(connection.ConnectionString);
+
             this.connection.Open();
 
             // transaction = this.connection.BeginTransaction();

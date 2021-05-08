@@ -26,10 +26,11 @@ namespace ATech.Repository.Dapper.Extensions
             PropertyInfo[] propertyInfos = entity.GetType().GetProperties();
             string[] columns = propertyInfos.Where(p => p.Name.ToLower() != "id").Select(p => p.Name).ToArray();
 
-            return string.Format("INSERT INTO {0} ({1}) OUTPUT inserted.ID VALUES (@{2})",
+            var query = string.Format("INSERT INTO {0} ({1}) VALUES (@{2})",
                                              tableName,
                                              string.Join(",", columns),
                                              string.Join(",@", columns));
+            return query;
         }
 
         /// <summary>
@@ -46,7 +47,9 @@ namespace ATech.Repository.Dapper.Extensions
 
             var parameters = columns.Select(name => name + "=@" + name).ToList();
 
-            return string.Format("UPDATE {0} SET {1} WHERE Id=@Id", tableName, string.Join(",", parameters));
+            var query = string.Format("UPDATE {0} SET {1} WHERE Id=@Id", tableName, string.Join(",", parameters));
+
+            return query;
         }
 
         /// <summary>
@@ -63,7 +66,9 @@ namespace ATech.Repository.Dapper.Extensions
 
             var parameters = columns.Select(name => name + "=@" + name).ToList();
 
-            return string.Format("DELETE FROM {0} WHERE Id=@Id", tableName, string.Join(",", parameters));
+            var query = string.Format("DELETE FROM {0} WHERE Id=@Id", tableName, string.Join(",", parameters));
+            
+            return query;
         }
 
         /// <summary>

@@ -6,6 +6,8 @@ using Serilog;
 using System.Globalization;
 using System.Threading;
 using System.Data.SqlClient;
+using Microsoft.Data.Sqlite;
+using System.Data;
 
 namespace ATech.Repository.CrashTestDummy
 {
@@ -13,7 +15,7 @@ namespace ATech.Repository.CrashTestDummy
     {
         public static IConfiguration Configuration { get; private set; }
 
-        public static SqlConnection Connection { get; private set; }
+        public static IDbConnection Connection { get; private set; }
 
         public static void Main(string[] args)
         {
@@ -57,11 +59,21 @@ namespace ATech.Repository.CrashTestDummy
             Host.CreateDefaultBuilder(args)
                 .ConfigureServices((hostContext, services) =>
                 {
-                    var connectionString = Configuration.GetConnectionString("IoTDataMartDb");
-                    Connection = new SqlConnection(connectionString);
+                    if ((args.Length > 0) && args[0] == "sqlite")
+                    {
+                        var connectionString = Configuration.GetConnectionString("SqlLiteConnectionString");
+                        Connection = new SqliteConnection(connectionString);
+                    }
+                    else
+                    {
+                        var connectionString = Configuration.GetConnectionString("SqlServerConnectionString");
+                        Connection = new SqlConnection(connectionString);
+                    }
+
                     services.AddSingleton(Connection);
 
                     services.AddHostedService<Worker>();
+
                 })
                 .UseSerilog();
     }
