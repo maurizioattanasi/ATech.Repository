@@ -12,8 +12,8 @@ namespace ATech.Repository.CrashTestDummy.Repository
 
         IMeasureRepository Measures { get; }
         
-        int Complete();
+        // int Complete();
 
-        Task<int> CompleteAsync(CancellationToken cancellationToken);
+        // Task<int> CompleteAsync(CancellationToken cancellationToken);
     }
 }

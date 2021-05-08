@@ -30,7 +30,7 @@ CREATE TABLE [dbo].[PhysicalDimension]
 (
     [Id] SMALLINT IDENTITY(1, 1) NOT NULL,
     [Name] NVARCHAR(255) NOT NULL,
-    [Unit] NVARCHAR(32) NULL,
+    [Scale] NVARCHAR(32) NULL,
     [Created] DATETIME2 NOT NULL,
     [CreatedBy] NVARCHAR(255) NULL,
     CONSTRAINT PK_PhysicalDimension_Id PRIMARY KEY (ID) WITH (FILLFACTOR = 100),
@@ -45,6 +45,7 @@ CREATE TABLE [dbo].[Sensor]
     [Name] NVARCHAR(255) NOT NULL,
     [Make] NVARCHAR(255) NULL,
     [Model] NVARCHAR(255) NULL,
+    [SerialNumber] NVARCHAR(255) NULL,
     [PhysicalDimensionId] SMALLINT NOT NULL,
     [Created] DATETIME2 NOT NULL,
     [CreatedBy] NVARCHAR(255) NULL,

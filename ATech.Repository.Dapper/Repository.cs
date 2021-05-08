@@ -5,8 +5,6 @@ using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
 using ATech.Repository.Dapper.Extensions;
-using Dapper;
-
 
 namespace ATech.Repository.Dapper
 {
@@ -16,17 +14,11 @@ namespace ATech.Repository.Dapper
 
         public Repository(IDbConnection connection) => this.connection = connection ?? throw new ArgumentNullException(nameof(connection));
 
-        private string TableName { get { return typeof(TEntity).Name; } }
+        public void Add(TEntity entity) 
+            => connection.Insert<TEntity>(entity);
 
-        public void Add(TEntity entity)
-        {
-            connection.Insert<TEntity>(entity);
-        }
-
-        public async Task AddAsync(TEntity entity, CancellationToken cancellationToken)
-        {            
-            await connection.InsertAsync<TEntity>(entity);
-        }
+        public async Task AddAsync(TEntity entity, CancellationToken cancellationToken) 
+            => await connection.InsertAsync<TEntity>(entity);
 
         public void AddRange(IEnumerable<TEntity> entities)
         {
@@ -39,7 +31,7 @@ namespace ATech.Repository.Dapper
             }
         }
 
-        public int Count() => connection.QueryFirst<int>($"SELECT COUNT(*) FROM {TableName}");
+        public int Count() => connection.Count<TEntity>();
 
         public IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> predicate)
         {
@@ -51,19 +43,26 @@ namespace ATech.Repository.Dapper
             throw new NotImplementedException();
         }
 
-        public TEntity Get(int id) => connection.QuerySingleOrDefault<TEntity>($"SELECT * FROM {TableName} WHERE Id=@Id", new { Id = id });
+        public TEntity Get(int id) 
+            => connection.Get<TEntity>(id);
 
-        public TEntity Get(Guid id) => connection.QuerySingleOrDefault<TEntity>($"SELECT * FROM {TableName} WHERE Id=@Id", new { Id = id });
+        public TEntity Get(Guid id) 
+            => connection.Get<TEntity>(id);
 
-        public IEnumerable<TEntity> GetAll() => connection.Query<TEntity>($"SELECT * FROM {TableName}");
+        public IEnumerable<TEntity> GetAll() 
+            => connection.GetAll<TEntity>();
 
-        public async Task<IEnumerable<TEntity>> GetAllAsync(CancellationToken cancellationToken) => await connection.QueryAsync<TEntity>($"SELECT * FROM {TableName}");
+        public async Task<IEnumerable<TEntity>> GetAllAsync(CancellationToken cancellationToken) 
+            => await connection.GetAllAsync<TEntity>(cancellationToken);
 
-        public async Task<TEntity> GetAsync(int id, CancellationToken cancellationToken) => await connection.QuerySingleOrDefaultAsync<TEntity>($"SELECT * FROM {TableName} WHERE Id=@Id", new { Id = id });
+        public async Task<TEntity> GetAsync(int id, CancellationToken cancellationToken) 
+            => await connection.GetAsync<TEntity>(id, cancellationToken);
 
-        public async Task<TEntity> GetAsync(Guid id, CancellationToken cancellationToken) => await connection.QuerySingleOrDefaultAsync<TEntity>($"SELECT * FROM {TableName} WHERE Id=@Id", new { Id = id });
+        public async Task<TEntity> GetAsync(Guid id, CancellationToken cancellationToken) 
+            => await connection.GetAsync<TEntity>(id, cancellationToken);
 
-        public void Remove(TEntity entity) => connection.Delete<TEntity>(entity);
+        public void Remove(TEntity entity) 
+            => connection.Delete<TEntity>(entity);
 
         public void RemoveRange(IEnumerable<TEntity> entities)
         {

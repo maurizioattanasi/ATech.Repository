@@ -8,8 +8,7 @@ namespace ATech.Repository.CrashTestDummy.Repository
     public class IoTDataMartDbUnitOfWork : IIoTDataMartDbUnitOfWork
     {
         private readonly SqlConnection connection;
-        private SqlTransaction transaction;
-
+        
         public IoTDataMartDbUnitOfWork(ref SqlConnection connection)
         {
             if(connection is null)
@@ -33,19 +32,19 @@ namespace ATech.Repository.CrashTestDummy.Repository
 
         public IMeasureRepository Measures { get; }
 
-        public int Complete()
-        {
-            // transaction.Commit();
+        // public int Complete()
+        // {
+        //     // transaction.Commit();
 
-            return 0;
-        }
+        //     return 0;
+        // }
 
-        public async Task<int> CompleteAsync(CancellationToken cancellationToken)
-        {
-            // await transaction.CommitAsync(cancellationToken);
+        // public async Task<int> CompleteAsync(CancellationToken cancellationToken)
+        // {
+        //     // await transaction.CommitAsync(cancellationToken);
 
-            return 0;
-        }
+        //     return 0;
+        // }
 
         public void Dispose()
         {
