@@ -3,9 +3,9 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
     <Authors>Maurizio Attanasi</Authors>
-    <Version>1.0.3</Version>
+    <Version>1.0.4</Version>
     <Description>A generic implementation for the repository pattern in C#</Description>
-    <PackageReleaseNotes>Code refactoring</PackageReleaseNotes>
+    <PackageReleaseNotes>Dapper support added</PackageReleaseNotes>
     <PackageProjectUrl>https://github.com/maurizioattanasi/ATech.Repository</PackageProjectUrl>
     <Copyright>Maurizio Attanasi</Copyright>
   </PropertyGroup>
