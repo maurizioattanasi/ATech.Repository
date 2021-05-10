@@ -81,6 +81,13 @@ namespace ATech.Repository.CrashTestDummy
 
             var dimension = unitOfWork.PhysicalDimensions.Find(d => d.Name.ToLower() == "humidity").FirstOrDefault();
 
+            dimension.Name = "Humidity01";
+
+            await unitOfWork
+                .PhysicalDimensions
+                .UpdateAsync(dimension, default)
+                .ConfigureAwait(false);
+
             dimensions = await unitOfWork
                 .PhysicalDimensions
                 .GetAllAsync(cancellationToken)

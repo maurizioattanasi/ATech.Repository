@@ -54,5 +54,11 @@ namespace ATech.Repository.EntityFrameworkCore
 
         public int Count() 
             => this.Context.Set<TEntity>().Count();
+
+        public void Update(TEntity entity) 
+            => throw new NotImplementedException();
+
+        public Task UpdateAsync(TEntity entity, CancellationToken cancellationToken) 
+            => throw new NotImplementedException();
     }
 }

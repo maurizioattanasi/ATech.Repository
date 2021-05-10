@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ATech.Repository.Dapper", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ATech.Repository.CrashTestDummy", "ATech.Repository.CrashTestDummy\ATech.Repository.CrashTestDummy.csproj", "{A2707F80-324B-4EBD-81B4-C81E8420FFF5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ATech.Repository.Test", "ATech.Repository.Test\ATech.Repository.Test.csproj", "{DCDE23A5-21EA-4584-A1E9-A02457ADE594}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -72,5 +74,17 @@ Global
 		{A2707F80-324B-4EBD-81B4-C81E8420FFF5}.Release|x64.Build.0 = Release|Any CPU
 		{A2707F80-324B-4EBD-81B4-C81E8420FFF5}.Release|x86.ActiveCfg = Release|Any CPU
 		{A2707F80-324B-4EBD-81B4-C81E8420FFF5}.Release|x86.Build.0 = Release|Any CPU
+		{DCDE23A5-21EA-4584-A1E9-A02457ADE594}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DCDE23A5-21EA-4584-A1E9-A02457ADE594}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DCDE23A5-21EA-4584-A1E9-A02457ADE594}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{DCDE23A5-21EA-4584-A1E9-A02457ADE594}.Debug|x64.Build.0 = Debug|Any CPU
+		{DCDE23A5-21EA-4584-A1E9-A02457ADE594}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{DCDE23A5-21EA-4584-A1E9-A02457ADE594}.Debug|x86.Build.0 = Debug|Any CPU
+		{DCDE23A5-21EA-4584-A1E9-A02457ADE594}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DCDE23A5-21EA-4584-A1E9-A02457ADE594}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DCDE23A5-21EA-4584-A1E9-A02457ADE594}.Release|x64.ActiveCfg = Release|Any CPU
+		{DCDE23A5-21EA-4584-A1E9-A02457ADE594}.Release|x64.Build.0 = Release|Any CPU
+		{DCDE23A5-21EA-4584-A1E9-A02457ADE594}.Release|x86.ActiveCfg = Release|Any CPU
+		{DCDE23A5-21EA-4584-A1E9-A02457ADE594}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

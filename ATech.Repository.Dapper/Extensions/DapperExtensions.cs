@@ -43,7 +43,7 @@ namespace ATech.Repository.Dapper.Extensions
             var tableName = typeof(TEntity).Name;
 
             PropertyInfo[] propertyInfos = entity.GetType().GetProperties();
-            string[] columns = propertyInfos.Select(p => p.Name).ToArray();
+            string[] columns = propertyInfos.Where(p => p.Name.ToLower() != "id").Select(p => p.Name).ToArray();
 
             var parameters = columns.Select(name => name + "=@" + name).ToList();
 
@@ -140,7 +140,7 @@ namespace ATech.Repository.Dapper.Extensions
         // <summary>
         /// Generic row update extension method
         /// </summary>     
-        public static async Task UpdateAsync<TEntity>(this IDbConnection connection, dynamic entity)
+        public static async Task UpdateAsync<TEntity>(this IDbConnection connection, dynamic entity, CancellationToken cancellationToken)
             => await SqlMapper.ExecuteAsync(connection, BuildUpdateQuery<TEntity>(entity), entity);
 
         // <summary>

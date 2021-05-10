@@ -10,7 +10,7 @@
             "request": "launch",
             "preLaunchTask": "build",
             "program": "${workspaceFolder}/ATech.Repository.CrashTestDummy/bin/Debug/netcoreapp3.1/ATech.Repository.CrashTestDummy.dll",
-            "args": ["sqlite"],
+            "args": [],
             "cwd": "${workspaceFolder}/ATech.Repository.CrashTestDummy",
             "console": "internalConsole",
             "stopAtEntry": false,

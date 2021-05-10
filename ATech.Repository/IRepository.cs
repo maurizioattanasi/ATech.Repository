@@ -23,6 +23,10 @@ namespace ATech.Repository
 
         void AddRange(IEnumerable<TEntity> entities);
 
+        void Update(TEntity entity);
+
+        Task UpdateAsync(TEntity entity, CancellationToken cancellationToken);
+
         void Remove(TEntity entity);
 
         void RemoveRange(IEnumerable<TEntity> entities);
