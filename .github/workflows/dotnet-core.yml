@@ -27,6 +27,8 @@ jobs:
     - name: Pack ATech.Repository.EntityFrameworkCore
       run: 
         dotnet pack ./ATech.Repository.EntityFrameworkCore/ATech.Repository.EntityFrameworkCore.csproj --output nuget-packages --configuration Release
+    - name: Pack ATech.Repository.Dapper
+      run: dotnet pack ./ATech.Repository.Dapper/ATech.Repository.Dapper.csproj --output nuget-packages --configuration Release
     - name: Push with dotnet
       run: dotnet nuget push nuget-packages/*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json
 
