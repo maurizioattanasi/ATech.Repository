@@ -1,17 +1,17 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net7.0</TargetFramework>
     <Authors>Maurizio Attanasi</Authors>
-    <Version>1.1.0.0</Version>
+    <Version>1.2.0.0</Version>
     <Description>Entity framework core implementation for the repository pattern</Description>
-    <PackageReleaseNotes>.NET 6 migration</PackageReleaseNotes>
+    <PackageReleaseNotes>.NET 7 migration</PackageReleaseNotes>
     <PackageProjectUrl>https://github.com/maurizioattanasi/ATech.Repository</PackageProjectUrl>
     <Copyright>Maurizio Attanasi</Copyright>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.2" />
   </ItemGroup>
 
   <ItemGroup>
