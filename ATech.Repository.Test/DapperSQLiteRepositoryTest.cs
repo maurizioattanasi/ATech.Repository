@@ -13,7 +13,7 @@ namespace ATech.Repository.Test
 
         public DapperSQLiteRepositoryTest()
         {
-            var connectionString = "Data Source=/Users/maurizioattanasi/Documents/work/projects/ATech/ATech.Repository/ATech.Repository.Test/sql/ATech.IoTDataMart.db";
+            var connectionString = "Data Source=../../../data/ATech.IoTDataMart.db";
             connection = new SqliteConnection(connectionString);
         }
 
