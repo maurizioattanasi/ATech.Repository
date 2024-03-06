@@ -1,7 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
-    <TargetFramework>net7.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <Authors>Maurizio Attanasi</Authors>
     <Version>1.2.0.0</Version>
     <Description>A generic implementation for the repository pattern in C#</Description>
@@ -9,5 +8,4 @@
     <PackageProjectUrl>https://github.com/maurizioattanasi/ATech.Repository</PackageProjectUrl>
     <Copyright>Maurizio Attanasi</Copyright>
   </PropertyGroup>
-
 </Project>

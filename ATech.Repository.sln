@@ -1,15 +1,15 @@
-﻿
+
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.6.30114.105
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ATech.Repository.EntityFrameworkCore", "ATech.Repository.EntityFrameworkCore\ATech.Repository.EntityFrameworkCore.csproj", "{D9848E65-9CAC-4EA8-8158-50BCF3C7AA00}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ATech.Repository.EntityFrameworkCore", "ATech.Repository.EntityFrameworkCore\ATech.Repository.EntityFrameworkCore.csproj", "{D9848E65-9CAC-4EA8-8158-50BCF3C7AA00}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ATech.Repository", "ATech.Repository\ATech.Repository.csproj", "{C3A4CBAC-8130-49AD-949D-3AECEBC90FCE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ATech.Repository", "ATech.Repository\ATech.Repository.csproj", "{C3A4CBAC-8130-49AD-949D-3AECEBC90FCE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ATech.Repository.Dapper", "ATech.Repository.Dapper\ATech.Repository.Dapper.csproj", "{79C418ED-B2CA-4D3B-81FF-7D127E49B09F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ATech.Repository.Dapper", "ATech.Repository.Dapper\ATech.Repository.Dapper.csproj", "{79C418ED-B2CA-4D3B-81FF-7D127E49B09F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ATech.Repository.Test", "ATech.Repository.Test\ATech.Repository.Test.csproj", "{DCDE23A5-21EA-4584-A1E9-A02457ADE594}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ATech.Repository.Test", "ATech.Repository.Test\ATech.Repository.Test.csproj", "{DCDE23A5-21EA-4584-A1E9-A02457ADE594}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
