@@ -123,3 +123,7 @@ An example of how the use of the class is contained in the **ATech.Repository.Te
 
 - [Dapper ORM](https://dapper-tutorial.net)
 - [Dapper vs EF Core Query Performance Benchmarking](https://exceptionnotfound.net/dapper-vs-entity-framework-core-query-performance-benchmarking-2019/)
+
+## Releases
+
+- 1.3.0.0 - Migration to .NET 8
