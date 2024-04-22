@@ -76,7 +76,7 @@ namespace ATech.Repository.Dapper.Extensions
         /// </summary>        
         /// <param name="id">Unique id</param>        
         /// <returns>The item corresponding to the given id if exists</returns>
-        public static TEntity Get<TEntity>(this IDbConnection connection, int id)
+        public static TEntity Get<TEntity, TId>(this IDbConnection connection, TId id)
             => connection.QuerySingleOrDefault<TEntity>($"SELECT * FROM {typeof(TEntity).Name} WHERE Id=@Id");
 
         /// <summary>
@@ -84,23 +84,7 @@ namespace ATech.Repository.Dapper.Extensions
         /// </summary>        
         /// <param name="id">Unique id</param>        
         /// <returns>The item corresponding to the given id if exists</returns>
-        public static async Task<TEntity> GetAsync<TEntity>(this IDbConnection connection, int id, CancellationToken cancellationToken)
-            => await connection.QuerySingleOrDefaultAsync<TEntity>($"SELECT * FROM {typeof(TEntity).Name} WHERE Id=@Id", new { Id = id });
-
-        /// <summary>
-        /// Generic synchronous Read extension method
-        /// </summary>        
-        /// <param name="id">Unique id</param>        
-        /// <returns>The item corresponding to the given id if exists</returns>
-        public static TEntity Get<TEntity>(this IDbConnection connection, Guid id)
-            => connection.QuerySingleOrDefault<TEntity>($"SELECT * FROM {typeof(TEntity).Name} WHERE Id=@Id");
-
-        /// <summary>
-        /// Generic asynchronous Read extension method
-        /// </summary>        
-        /// <param name="id">Unique id</param>        
-        /// <returns>The item corresponding to the given id if exists</returns>
-        public static async Task<TEntity> GetAsync<TEntity>(this IDbConnection connection, Guid id, CancellationToken cancellationToken)
+        public static async ValueTask<TEntity> GetAsync<TEntity, TId>(this IDbConnection connection, TId id, CancellationToken cancellationToken)
             => await connection.QuerySingleOrDefaultAsync<TEntity>($"SELECT * FROM {typeof(TEntity).Name} WHERE Id=@Id", new { Id = id });
 
         /// <summary>
@@ -114,7 +98,7 @@ namespace ATech.Repository.Dapper.Extensions
         /// Generic asynchronous Read extension method
         /// </summary>                     
         /// <returns>all the table items</returns>
-        public static async Task<IEnumerable<TEntity>> GetAllAsync<TEntity>(this IDbConnection connection, CancellationToken cancellationToken)
+        public static async ValueTask<IEnumerable<TEntity>> GetAllAsync<TEntity>(this IDbConnection connection, CancellationToken cancellationToken)
             => await connection.QueryAsync<TEntity>($"SELECT * FROM {typeof(TEntity).Name}");
 
         /// <summary>
@@ -128,7 +112,7 @@ namespace ATech.Repository.Dapper.Extensions
         /// Generic row creation extension method
         /// </summary>        
         /// <param name="entity">the item to create</param>
-        public static async Task InsertAsync<TEntity>(this IDbConnection connection, dynamic entity)
+        public static async ValueTask InsertAsync<TEntity>(this IDbConnection connection, dynamic entity)
             => await SqlMapper.QueryAsync<TEntity>(connection, BuildInsertQuery<TEntity>(entity), entity);
 
         // <summary>
@@ -140,7 +124,7 @@ namespace ATech.Repository.Dapper.Extensions
         // <summary>
         /// Generic row update extension method
         /// </summary>     
-        public static async Task UpdateAsync<TEntity>(this IDbConnection connection, dynamic entity, CancellationToken cancellationToken)
+        public static async ValueTask UpdateAsync<TEntity>(this IDbConnection connection, dynamic entity, CancellationToken cancellationToken)
             => await SqlMapper.ExecuteAsync(connection, BuildUpdateQuery<TEntity>(entity), entity);
 
         // <summary>
