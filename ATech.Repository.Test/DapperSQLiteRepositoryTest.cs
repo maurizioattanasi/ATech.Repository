@@ -28,8 +28,7 @@ namespace ATech.Repository.Test
 
             var rows = await unitOfWork
                 .PhysicalDimensions
-                .GetAllAsync(default)
-                .ConfigureAwait(false);
+                .GetAllAsync(default);
 
             unitOfWork
                 .PhysicalDimensions
@@ -59,22 +58,19 @@ namespace ATech.Repository.Test
 
             rows = await unitOfWork
                    .PhysicalDimensions
-                   .GetAllAsync(default)
-                   .ConfigureAwait(false);
+                   .GetAllAsync(default);
 
             var row = rows.ToArray()[0];
 
             var retrieved = await unitOfWork
                 .PhysicalDimensions
-                .GetAsync(row.Id, default)
-                .ConfigureAwait(false);
+                .GetAsync(row.Id, default);
 
             retrieved.Name = "Humidity0123";
 
             await unitOfWork
                 .PhysicalDimensions
-                .UpdateAsync(retrieved, default)
-                .ConfigureAwait(false);
+                .UpdateAsync(retrieved, default);
 
             var dimension = unitOfWork.PhysicalDimensions.Find(d => d.Name.ToLower() == "humidity0123").FirstOrDefault();
 
@@ -82,8 +78,7 @@ namespace ATech.Repository.Test
 
             rows = await unitOfWork
                    .PhysicalDimensions
-                   .GetAllAsync(default)
-                   .ConfigureAwait(false);
+                   .GetAllAsync(default);
 
             foreach (var r in rows)
             {

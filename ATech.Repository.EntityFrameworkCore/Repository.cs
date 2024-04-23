@@ -53,10 +53,8 @@ namespace ATech.Repository.EntityFrameworkCore
         public void Update(TEntity entity) 
             => _context.Set<TEntity>().Update(entity);
 
-        public ValueTask UpdateAsync(TEntity entity, CancellationToken cancellationToken) {
-            _context.Set<TEntity>().Update(entity);
-            return Task.CompletedTask;
-        }
-            
+        public async ValueTask UpdateAsync(TEntity entity, CancellationToken cancellationToken) 
+            => await Task.Run(() => _context.Set<TEntity>().Update(entity), cancellationToken);
+
     }
 }

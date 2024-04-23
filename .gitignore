@@ -350,3 +350,4 @@ MigrationBackup/
 .ionide/
 .DS_Store
 ATech.Repository.Test/sql/ATech.IoTDataMart.db
+ATech.Repository.Test/data/ATech.IoTDataMart.db
