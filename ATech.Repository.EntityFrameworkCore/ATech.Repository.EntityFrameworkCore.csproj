@@ -10,6 +10,9 @@
     <Copyright>Maurizio Attanasi</Copyright>
   </PropertyGroup>
   <ItemGroup>
+    <None Include="README.md" Pack="true" PackagePath="\"/>
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\ATech.Repository\ATech.Repository.csproj" />
   </ItemGroup>
   <ItemGroup>
