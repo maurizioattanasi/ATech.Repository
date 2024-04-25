@@ -6,6 +6,7 @@
     <Description>Dapper implementation for the repository pattern</Description>
     <PackageReleaseNotes>.NET 8 migration</PackageReleaseNotes>
     <PackageProjectUrl>https://github.com/maurizioattanasi/ATech.Repository</PackageProjectUrl>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
     <Copyright>Maurizio Attanasi</Copyright>
   </PropertyGroup>
   <ItemGroup>
