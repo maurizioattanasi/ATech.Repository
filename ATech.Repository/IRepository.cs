@@ -3,34 +3,30 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace ATech.Repository
+namespace ATech.Repository;
+
+public interface IRepository<TEntity, TId>
 {
-    public interface IRepository<TEntity> where TEntity : class
-    {
-        TEntity Get(int id);
-        Task<TEntity> GetAsync(int id, CancellationToken cancellationToken);
+    TEntity Get(TId id);
+    ValueTask<TEntity> GetAsync(TId id, CancellationToken cancellationToken);
 
-        TEntity Get(Guid id);
-        Task<TEntity> GetAsync(Guid id, CancellationToken cancellationToken);
+    IEnumerable<TEntity> GetAll();
+    ValueTask<IEnumerable<TEntity>> GetAllAsync(CancellationToken cancellationToken);
 
-        IEnumerable<TEntity> GetAll();
-        Task<IEnumerable<TEntity>> GetAllAsync(CancellationToken cancellationToken);
+    IEnumerable<TEntity> Find(Func<TEntity, bool> predicate);
 
-        IEnumerable<TEntity> Find(Func<TEntity, bool> predicate);
+    void Add(TEntity entity);
+    ValueTask AddAsync(TEntity entity, CancellationToken cancellationToken);
 
-        void Add(TEntity entity);
-        Task AddAsync(TEntity entity, CancellationToken cancellationToken);
+    void AddRange(IEnumerable<TEntity> entities);
 
-        void AddRange(IEnumerable<TEntity> entities);
+    void Update(TEntity entity);
 
-        void Update(TEntity entity);
+    ValueTask    UpdateAsync(TEntity entity, CancellationToken cancellationToken);
 
-        Task UpdateAsync(TEntity entity, CancellationToken cancellationToken);
+    void Remove(TEntity entity);
 
-        void Remove(TEntity entity);
+    void RemoveRange(IEnumerable<TEntity> entities);
 
-        void RemoveRange(IEnumerable<TEntity> entities);
-
-        int Count();
-    }
+    int Count();
 }
