@@ -16,6 +16,26 @@ public class Repository<TEntity, TId> : IRepository<TEntity, TId>
     public Repository(IDbConnection connection)
         => this._connection = connection ?? throw new ArgumentNullException(nameof(connection));
 
+    public TEntity Get(TId id)
+        => _connection.Get<TEntity, TId>(id);
+
+    public async ValueTask<TEntity> GetAsync(TId id, CancellationToken cancellationToken)
+        => await _connection.GetAsync<TEntity, TId>(id, cancellationToken);
+
+    public IEnumerable<TEntity> GetAll()
+        => _connection.GetAll<TEntity>();
+
+    public async ValueTask<IEnumerable<TEntity>> GetAllAsync(CancellationToken cancellationToken)
+        => await _connection.GetAllAsync<TEntity>(cancellationToken);
+
+    public IEnumerable<TEntity> Find(Func<TEntity, bool> predicate)
+        => _connection.Find<TEntity>(predicate);
+
+    public IEnumerable<TEntity> Missing(IEnumerable<TEntity> toExclude, IEqualityComparer<TEntity> comparer)
+    {
+        throw new NotImplementedException();
+    }
+
     public void Add(TEntity entity)
         => _connection.Insert<TEntity>(entity);
 
@@ -33,28 +53,11 @@ public class Repository<TEntity, TId> : IRepository<TEntity, TId>
         }
     }
 
-    public int Count()
-        => _connection.Count<TEntity>();
-
-    public IEnumerable<TEntity> Find(Func<TEntity, bool> predicate)
-        => _connection.Find<TEntity>(predicate);
-
-    public TEntity Get(TId id)
-        => _connection.Get<TEntity, TId>(id);
-
-    public async ValueTask<TEntity> GetAsync(TId id, CancellationToken cancellationToken)
-        => await _connection.GetAsync<TEntity, TId>(id, cancellationToken);
-
-    public IEnumerable<TEntity> GetAll()
-        => _connection.GetAll<TEntity>();
-
-    public async ValueTask<IEnumerable<TEntity>> GetAllAsync(CancellationToken cancellationToken)
-        => await _connection.GetAllAsync<TEntity>(cancellationToken);
-
-    public void Update(TEntity entity)
-        => _connection.Update<TEntity>(entity);
-    public async ValueTask UpdateAsync(TEntity entity, CancellationToken cancellationToken)
-        => await _connection.UpdateAsync<TEntity>(entity, cancellationToken);
+    public virtual async ValueTask AddRangeAsync(IEnumerable<TEntity> entities, CancellationToken cancellationToken = default)
+    {
+        await Task.Yield();
+        AddRange(entities);
+    }
 
     public void Remove(TEntity entity)
         => _connection.Delete<TEntity>(entity);
@@ -69,6 +72,18 @@ public class Repository<TEntity, TId> : IRepository<TEntity, TId>
             }
         }
     }
+
+    public void Update(TEntity entity)
+        => _connection.Update<TEntity>(entity);
+    public async ValueTask UpdateAsync(TEntity entity, CancellationToken cancellationToken)
+        => await _connection.UpdateAsync<TEntity>(entity, cancellationToken);
+
+    public int Count()
+        => _connection.Count<TEntity>();
+
+    public int SaveChanges() => 0;
+
+    public Task<int> SaveChangesAsync(CancellationToken cancellationToken = default) => Task.FromResult(SaveChanges());
 }
 #pragma warning restore CS1591
 
