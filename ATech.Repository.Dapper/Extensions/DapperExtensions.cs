@@ -76,15 +76,14 @@ namespace ATech.Repository.Dapper.Extensions
         /// </summary>        
         /// <param name="id">Unique id</param>        
         /// <returns>The item corresponding to the given id if exists</returns>
-        public static TEntity Get<TEntity, TId>(this IDbConnection connection, TId id)
-            => connection.QuerySingleOrDefault<TEntity>($"SELECT * FROM {typeof(TEntity).Name} WHERE Id=@Id");
+        public static TEntity? Get<TEntity, TId>(this IDbConnection connection, TId id) => connection.QuerySingleOrDefault<TEntity>($"SELECT * FROM {typeof(TEntity).Name} WHERE Id=@Id");
 
         /// <summary>
         /// Generic asynchronous Read extension method
         /// </summary>        
         /// <param name="id">Unique id</param>        
         /// <returns>The item corresponding to the given id if exists</returns>
-        public static async ValueTask<TEntity> GetAsync<TEntity, TId>(this IDbConnection connection, TId id, CancellationToken cancellationToken)
+        public static async ValueTask<TEntity?> GetAsync<TEntity, TId>(this IDbConnection connection, TId id, CancellationToken cancellationToken)
             => await connection.QuerySingleOrDefaultAsync<TEntity>($"SELECT * FROM {typeof(TEntity).Name} WHERE Id=@Id", new { Id = id });
 
         /// <summary>

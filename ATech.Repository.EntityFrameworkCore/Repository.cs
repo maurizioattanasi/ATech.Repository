@@ -18,7 +18,14 @@ public class Repository<TEntity, TId> : IRepository<TEntity, TId> where TEntity 
         => _context.Set<TEntity>().Find(id);
 
     public virtual async ValueTask<TEntity?> GetAsync(TId id, CancellationToken cancellationToken)
-        => await _context.Set<TEntity>().FindAsync(new object[] { id }, cancellationToken);
+    {
+        if (id is null)
+        {
+            throw new ArgumentNullException(nameof(id), "Id cannot be null.");
+        }
+        
+        return await _context.Set<TEntity>().FindAsync(new object[] { id }, cancellationToken);
+    }
 
     public virtual IEnumerable<TEntity> GetAll()
         => _context.Set<TEntity>().ToList();
