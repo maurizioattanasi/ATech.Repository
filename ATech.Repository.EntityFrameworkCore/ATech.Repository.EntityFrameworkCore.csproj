@@ -1,8 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
     <Authors>Maurizio Attanasi</Authors>
-    <Version>2.0.1.0</Version>
+    <Version>2.0.2.0</Version>
     <Description>Entity framework core implementation for the repository pattern</Description>
     <PackageReleaseNotes>.NET 8 migration</PackageReleaseNotes>
     <PackageProjectUrl>https://github.com/maurizioattanasi/ATech.Repository</PackageProjectUrl>
