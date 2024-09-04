@@ -27,11 +27,11 @@ public class Repository<TEntity, TId> : IRepository<TEntity, TId> where TEntity 
         return await _context.Set<TEntity>().FindAsync(new object[] { id }, cancellationToken);
     }
 
-    public virtual IEnumerable<TEntity> GetAll()
-        => _context.Set<TEntity>().ToList();
+    public virtual IQueryable<TEntity> GetAll()
+        => _context.Set<TEntity>();
 
-    public virtual async ValueTask<IEnumerable<TEntity>> GetAllAsync(CancellationToken cancellationToken)
-        => await _context.Set<TEntity>().ToListAsync(cancellationToken);
+    public virtual async ValueTask<IQueryable<TEntity>> GetAllAsync(CancellationToken cancellationToken)
+        => await Task.Run(() => _context.Set<TEntity>());
 
     public virtual IEnumerable<TEntity> Find(Func<TEntity, bool> predicate)
         => _context.Set<TEntity>().Where(predicate);

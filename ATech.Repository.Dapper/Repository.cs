@@ -21,11 +21,11 @@ public class Repository<TEntity, TId> : IRepository<TEntity, TId>
     public async ValueTask<TEntity?> GetAsync(TId id, CancellationToken cancellationToken)
         => await _connection.GetAsync<TEntity, TId>(id, cancellationToken);
 
-    public IEnumerable<TEntity> GetAll()
-        => _connection.GetAll<TEntity>();
+    public IQueryable<TEntity> GetAll()
+        => _connection.GetAll<TEntity>().AsQueryable();
 
-    public async ValueTask<IEnumerable<TEntity>> GetAllAsync(CancellationToken cancellationToken)
-        => await _connection.GetAllAsync<TEntity>(cancellationToken);
+    public async ValueTask<IQueryable<TEntity>> GetAllAsync(CancellationToken cancellationToken)
+        => (await _connection.GetAllAsync<TEntity>(cancellationToken)).AsQueryable();
 
     public IEnumerable<TEntity> Find(Func<TEntity, bool> predicate)
         => _connection.Find<TEntity>(predicate);

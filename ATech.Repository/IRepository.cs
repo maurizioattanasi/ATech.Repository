@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -37,7 +38,7 @@ public interface IRepository<TEntity, TId>
     /// An IEnumerable of all entities in the data store.
     /// If no entities are found, an empty IEnumerable is returned.
     /// </returns>
-    IEnumerable<TEntity> GetAll();
+    IQueryable<TEntity> GetAll();
 
     /// <summary>
     /// Retrieves all entities from the data store asynchronously.
@@ -48,7 +49,7 @@ public interface IRepository<TEntity, TId>
     /// The result of the ValueTask will be an IEnumerable of all entities in the data store.
     /// If no entities are found, an empty IEnumerable is returned.
     /// </returns>
-    ValueTask<IEnumerable<TEntity>> GetAllAsync(CancellationToken cancellationToken);
+    ValueTask<IQueryable<TEntity>> GetAllAsync(CancellationToken cancellationToken);
 
     /// <summary>
     /// Retrieves a collection of entities from the data store based on the provided predicate.
