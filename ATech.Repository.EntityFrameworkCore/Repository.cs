@@ -31,7 +31,7 @@ public class Repository<TEntity, TId> : IRepository<TEntity, TId> where TEntity 
         => _context.Set<TEntity>();
 
     public virtual async ValueTask<IQueryable<TEntity>> GetAllAsync(CancellationToken cancellationToken)
-        => await Task.Run(() => _context.Set<TEntity>());
+        => await Task.Run(() => _context.Set<TEntity>(), cancellationToken);
 
     public virtual IEnumerable<TEntity> Find(Func<TEntity, bool> predicate)
         => _context.Set<TEntity>().Where(predicate);
