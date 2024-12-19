@@ -52,17 +52,6 @@ public interface IRepository<TEntity, TId>
     ValueTask<IQueryable<TEntity>> GetAllAsync(CancellationToken cancellationToken);
 
     /// <summary>
-    /// Retrieves a collection of entities from the data store based on the provided predicate.
-    /// </summary>
-    /// <param name="predicate">A function to test each element for a condition.</param>
-    /// <returns>
-    /// An IEnumerable of entities that satisfy the condition defined by the specified predicate.
-    /// If no entities satisfy the condition, an empty IEnumerable is returned.
-    /// </returns>
-    IEnumerable<TEntity> Find(Func<TEntity, bool> predicate);
-
-
-    /// <summary>
     /// Retrieves a collection of entities from the provided collection that are not present in the data store.
     /// </summary>
     /// <param name="toExclude">A collection of entities to exclude from the result.</param>

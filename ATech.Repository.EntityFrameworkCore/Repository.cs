@@ -33,9 +33,6 @@ public class Repository<TEntity, TId> : IRepository<TEntity, TId> where TEntity 
     public virtual async ValueTask<IQueryable<TEntity>> GetAllAsync(CancellationToken cancellationToken)
         => await Task.Run(() => _context.Set<TEntity>(), cancellationToken);
 
-    public virtual IEnumerable<TEntity> Find(Func<TEntity, bool> predicate)
-        => _context.Set<TEntity>().Where(predicate);
-
     public IEnumerable<TEntity> Missing(IEnumerable<TEntity> toExclude, IEqualityComparer<TEntity>? comparer)
         => toExclude.Except(_context.Set<TEntity>(), comparer);
 

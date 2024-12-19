@@ -3,9 +3,9 @@
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <Authors>Maurizio Attanasi</Authors>
-    <Version>2.0.5</Version>
+    <Version>2.0.6</Version>
     <Description>Entity framework core implementation for the repository pattern</Description>
-    <PackageReleaseNotes>.NET version update</PackageReleaseNotes>
+    <PackageReleaseNotes>Removed unused find method</PackageReleaseNotes>
     <PackageProjectUrl>https://github.com/maurizioattanasi/ATech.Repository</PackageProjectUrl>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <Copyright>Maurizio Attanasi</Copyright>

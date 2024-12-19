@@ -27,9 +27,6 @@ public class Repository<TEntity, TId> : IRepository<TEntity, TId>
     public async ValueTask<IQueryable<TEntity>> GetAllAsync(CancellationToken cancellationToken)
         => (await _connection.GetAllAsync<TEntity>(cancellationToken)).AsQueryable();
 
-    public IEnumerable<TEntity> Find(Func<TEntity, bool> predicate)
-        => _connection.Find<TEntity>(predicate);
-
     public IEnumerable<TEntity> Missing(IEnumerable<TEntity> toExclude, IEqualityComparer<TEntity>? comparer)
         => toExclude.Except(_connection.GetAll<TEntity>(), comparer);
 
