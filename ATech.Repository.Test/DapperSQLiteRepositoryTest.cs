@@ -72,7 +72,7 @@ namespace ATech.Repository.Test
                 .PhysicalDimensions
                 .UpdateAsync(retrieved, default);
 
-            var dimension = unitOfWork.PhysicalDimensions.GetAll.Where(d => d.Name.ToLower() == "humidity0123").FirstOrDefault();
+            var dimension = unitOfWork.PhysicalDimensions.GetAll().Where(d => d.Name.ToLower() == "humidity0123").FirstOrDefault();
 
             Assert.True((dimension != null) && (dimension.Name == "Humidity0123"));
 
