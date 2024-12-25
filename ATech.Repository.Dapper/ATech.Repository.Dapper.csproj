@@ -3,7 +3,7 @@
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <Authors>Maurizio Attanasi</Authors>
-    <Version>2.1.1</Version>
+    <Version>2.1.2</Version>
     <Description>Dapper implementation for the repository pattern</Description>
     <PackageReleaseNotes>Added self registration method</PackageReleaseNotes>
     <PackageProjectUrl>https://github.com/maurizioattanasi/ATech.Repository</PackageProjectUrl>
