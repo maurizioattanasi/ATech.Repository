@@ -14,10 +14,10 @@ public class Repository<TEntity, TId> : IRepository<TEntity, TId> where TEntity 
     public Repository(DbContext context)
         => _context = context;
 
-    public virtual TEntity? Get(TId id)
+    public virtual TEntity? GetById(TId id)
         => _context.Set<TEntity>().Find(id);
 
-    public virtual async ValueTask<TEntity?> GetAsync(TId id, CancellationToken cancellationToken)
+    public virtual async ValueTask<TEntity?> GetByIdAsync(TId id, CancellationToken cancellationToken)
     {
         if (id is null)
         {

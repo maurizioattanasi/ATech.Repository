@@ -17,7 +17,7 @@ public interface IReadRepository<TEntity, TId>
     /// </summary>
     /// <param name="id">The primary key of the entity to retrieve.</param>
     /// <returns>The entity with the specified primary key, or null if not found.</returns>
-    TEntity? Get(TId id);
+    TEntity? GetById(TId id);
 
     /// <summary>
     /// Retrieves an entity from the data store based on the provided primary key asynchronously.
@@ -28,7 +28,7 @@ public interface IReadRepository<TEntity, TId>
     /// A ValueTask that represents the asynchronous operation.
     /// The result of the ValueTask will be the entity with the specified primary key, or null if not found.
     /// </returns>
-    ValueTask<TEntity?> GetAsync(TId id, CancellationToken cancellationToken);
+    ValueTask<TEntity?> GetByIdAsync(TId id, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Retrieves all entities from the data store.

@@ -65,7 +65,7 @@ namespace ATech.Repository.Test
 
             var retrieved = await unitOfWork
                 .PhysicalDimensions
-                .GetAsync(row.Id, default);
+                .GetByIdAsync(row.Id, default);
 
             retrieved.Name = "Humidity0123";
 

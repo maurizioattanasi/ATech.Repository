@@ -15,10 +15,10 @@ public class Repository<TEntity, TId> : IRepository<TEntity, TId> where TEntity 
     public Repository(IDbConnection connection)
         => this._connection = connection ?? throw new ArgumentNullException(nameof(connection));
 
-    public TEntity? Get(TId id)
+    public TEntity? GetById(TId id)
         => _connection.Get<TEntity, TId>(id);
 
-    public async ValueTask<TEntity?> GetAsync(TId id, CancellationToken cancellationToken)
+    public async ValueTask<TEntity?> GetByIdAsync(TId id, CancellationToken cancellationToken)
         => await _connection.GetAsync<TEntity, TId>(id, cancellationToken);
 
     public IQueryable<TEntity> GetAll()
