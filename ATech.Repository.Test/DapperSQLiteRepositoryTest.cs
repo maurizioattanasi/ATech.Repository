@@ -4,6 +4,7 @@ using System.Data;
 using ATech.Repository.Test.Repository;
 using System.Linq;
 using Microsoft.Data.Sqlite;
+using System.Threading.Tasks;
 
 namespace ATech.Repository.Test
 {
@@ -22,7 +23,7 @@ namespace ATech.Repository.Test
         /// </summary>
         /// <returns></returns>
         [Fact]
-        public async void CRUDTest()
+        public async Task CRUDTest()
         {
             var unitOfWork = new IoTDataMartDbUnitOfWork(ref connection);
 

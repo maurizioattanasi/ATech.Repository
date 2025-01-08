@@ -8,7 +8,7 @@ using ATech.Repository.Dapper.Extensions;
 
 namespace ATech.Repository.Dapper;
 
-public class Repository<TEntity, TId> : IRepository<TEntity, TId>
+public class Repository<TEntity, TId> : IRepository<TEntity, TId> where TEntity : class
 {
     private readonly IDbConnection _connection;
 
