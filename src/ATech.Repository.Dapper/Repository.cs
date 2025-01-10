@@ -4,6 +4,7 @@ using System.Data;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using ATech.Repository;
 using ATech.Repository.Dapper.Extensions;
 
 namespace ATech.Repository.Dapper;
@@ -137,12 +138,12 @@ public class Repository<TEntity, TId> : IRepository<TEntity, TId> where TEntity 
         throw new NotImplementedException();
     }
 
-    public ValueTask<int> AnyAsync(CancellationToken cancellationToken = default)
+    public ValueTask<bool> AnyAsync(CancellationToken cancellationToken = default)
     {
         throw new NotImplementedException();
     }
 
-    public ValueTask<int> AnyAsync(ISpecification<TEntity> specification, CancellationToken cancellationToken = default)
+    public ValueTask<bool> AnyAsync(ISpecification<TEntity> specification, CancellationToken cancellationToken = default)
     {
         throw new NotImplementedException();
     }

@@ -20,7 +20,9 @@
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="9.0.0" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ATech.Repository.Dapper\ATech.Repository.Dapper.csproj" />
-    <ProjectReference Include="..\ATech.Repository.EntityFrameworkCore\ATech.Repository.EntityFrameworkCore.csproj" />
+    <ProjectReference Include="..\..\src\ATech.Repository.Dapper\ATech.Repository.Dapper.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="EntityFrameworkCore\" />
   </ItemGroup>
 </Project>

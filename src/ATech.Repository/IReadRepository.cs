@@ -85,6 +85,7 @@ public interface IReadRepository<TEntity, TId> where TEntity : class
     /// </returns>
     ValueTask<List<TEntity>> ListAsync(ISpecification<TEntity> specification, CancellationToken cancellationToken = default);
 
+
     /// <summary>
     /// Asynchronously checks if any entities exist in the data store.
     /// </summary>
@@ -94,11 +95,10 @@ public interface IReadRepository<TEntity, TId> where TEntity : class
     /// </param>
     /// <returns>
     /// A ValueTask that represents the asynchronous operation.
-    /// The result of the ValueTask will be an integer representing the count of entities in the data store.
-    /// If the count is greater than 0, it means that at least one entity exists in the data store.
-    /// If the count is 0, it means that no entities exist in the data store.
+    /// The result of the ValueTask will be a boolean value indicating whether any entities exist in the data store.
+    /// If at least one entity is found, the method will return true. Otherwise, it will return false.
     /// </returns>
-    ValueTask<int> AnyAsync(CancellationToken cancellationToken = default);
+    ValueTask<bool> AnyAsync(CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Asynchronously checks if any entities exist in the data store that satisfy the provided specification.
@@ -106,7 +106,7 @@ public interface IReadRepository<TEntity, TId> where TEntity : class
     /// <param name="specification">
     /// The specification that the entities must satisfy.
     /// This parameter can be used to filter, sort, or paginate the results.
-    /// If no specification is provided, the function will check for any entities in the data store.
+    /// If no specification is provided, the method will check for any entities in the data store.
     /// </param>
     /// <param name="cancellationToken">
     /// A cancellation token to cancel the operation.
@@ -114,11 +114,10 @@ public interface IReadRepository<TEntity, TId> where TEntity : class
     /// </param>
     /// <returns>
     /// A ValueTask that represents the asynchronous operation.
-    /// The result of the ValueTask will be an integer representing the count of entities in the data store that satisfy the provided specification.
-    /// If the count is greater than 0, it means that at least one entity exists in the data store that satisfies the specification.
-    /// If the count is 0, it means that no entities exist in the data store that satisfy the specification.
+    /// The result of the ValueTask will be a boolean value indicating whether any entities exist in the data store that satisfy the provided specification.
+    /// If at least one entity is found, the method will return true. Otherwise, it will return false.
     /// </returns>
-    ValueTask<int> AnyAsync(ISpecification<TEntity> specification, CancellationToken cancellationToken = default);
+    ValueTask<bool> AnyAsync(ISpecification<TEntity> specification, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Asynchronously retrieves the total number of entities in the data store.

@@ -4,20 +4,19 @@
     <Nullable>enable</Nullable>
     <Authors>Maurizio Attanasi</Authors>
     <Version>2.1.3</Version>
-    <Description>Dapper implementation for the repository pattern</Description>
+    <Description>Entity framework core implementation for the repository pattern</Description>
     <PackageReleaseNotes>Added self registration method</PackageReleaseNotes>
     <PackageProjectUrl>https://github.com/maurizioattanasi/ATech.Repository</PackageProjectUrl>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <Copyright>Maurizio Attanasi</Copyright>
   </PropertyGroup>
   <ItemGroup>
-    <None Include="../README.md" Pack="true" PackagePath="\" />
+    <None Include="../../README.md" Pack="true" PackagePath="\" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.0" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ATech.Repository\ATech.Repository.csproj" />
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="Dapper" Version="2.1.35" />
-    <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
   </ItemGroup>
 </Project>
