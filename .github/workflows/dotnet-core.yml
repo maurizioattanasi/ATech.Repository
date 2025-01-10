@@ -16,20 +16,20 @@ jobs:
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 8.0.x
+        dotnet-version: 9.0.x
     - name: Install dependencies
       run: dotnet restore
     - name: Build
       run: dotnet build --configuration Release --no-restore
     - name: Pack ATech.Repository
       run: 
-        dotnet pack ./ATech.Repository/ATech.Repository.csproj --output nuget-packages --configuration Release
+        dotnet pack ./src/ATech.Repository/ATech.Repository.csproj --output nuget-packages --configuration Release
     - name: Pack ATech.Repository.EntityFrameworkCore
       run: 
-        dotnet pack ./ATech.Repository.EntityFrameworkCore/ATech.Repository.EntityFrameworkCore.csproj --output nuget-packages --configuration Release
+        dotnet pack ./src/ATech.Repository.EntityFrameworkCore/ATech.Repository.EntityFrameworkCore.csproj --output nuget-packages --configuration Release
     - name: Pack ATech.Repository.Dapper
       run: 
-        dotnet pack ./ATech.Repository.Dapper/ATech.Repository.Dapper.csproj --output nuget-packages --configuration Release
+        dotnet pack ./src/ATech.Repository.Dapper/ATech.Repository.Dapper.csproj --output nuget-packages --configuration Release
     - name: Push with dotnet
       run: 
         dotnet nuget push "**/*.nupkg" --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json --skip-duplicate

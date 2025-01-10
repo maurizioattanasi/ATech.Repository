@@ -4,21 +4,22 @@ using System.Data;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using ATech.Repository;
 using ATech.Repository.Dapper.Extensions;
 
 namespace ATech.Repository.Dapper;
 
-public class Repository<TEntity, TId> : IRepository<TEntity, TId>
+public class Repository<TEntity, TId> : IRepository<TEntity, TId> where TEntity : class
 {
     private readonly IDbConnection _connection;
 
     public Repository(IDbConnection connection)
         => this._connection = connection ?? throw new ArgumentNullException(nameof(connection));
 
-    public TEntity? Get(TId id)
+    public TEntity? GetById(TId id)
         => _connection.Get<TEntity, TId>(id);
 
-    public async ValueTask<TEntity?> GetAsync(TId id, CancellationToken cancellationToken)
+    public async ValueTask<TEntity?> GetByIdAsync(TId id, CancellationToken cancellationToken)
         => await _connection.GetAsync<TEntity, TId>(id, cancellationToken);
 
     public IQueryable<TEntity> GetAll()
@@ -116,6 +117,47 @@ public class Repository<TEntity, TId> : IRepository<TEntity, TId>
     public int SaveChanges() => 0;
 
     public Task<int> SaveChangesAsync(CancellationToken cancellationToken = default) => Task.FromResult(SaveChanges());
+
+    public ValueTask<TEntity?> SingleOrDefaultAsync(ISpecification<TEntity> specification, CancellationToken cancellationToken = default)
+    {
+        throw new NotImplementedException();
+    }
+
+    public ValueTask<TEntity?> FirstOrDefaultAsync(ISpecification<TEntity> specification, CancellationToken cancellationToken = default)
+    {
+        throw new NotImplementedException();
+    }
+
+    public ValueTask<List<TEntity>> ListAsync(CancellationToken cancellationToken = default)
+    {
+        throw new NotImplementedException();
+    }
+
+    public ValueTask<List<TEntity>> ListAsync(ISpecification<TEntity> specification, CancellationToken cancellationToken = default)
+    {
+        throw new NotImplementedException();
+    }
+
+    public ValueTask<bool> AnyAsync(CancellationToken cancellationToken = default)
+    {
+        throw new NotImplementedException();
+    }
+
+    public ValueTask<bool> AnyAsync(ISpecification<TEntity> specification, CancellationToken cancellationToken = default)
+    {
+        throw new NotImplementedException();
+    }
+
+    public ValueTask<int> CountAsync(CancellationToken cancellationToken = default)
+    {
+        throw new NotImplementedException();
+    }
+
+    public ValueTask<int> CountAsync(ISpecification<TEntity> specification, CancellationToken cancellationToken = default)
+    {
+        throw new NotImplementedException();
+    }
+
 }
 
 
