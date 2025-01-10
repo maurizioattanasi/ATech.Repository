@@ -116,6 +116,47 @@ public class Repository<TEntity, TId> : IRepository<TEntity, TId> where TEntity 
     public int SaveChanges() => 0;
 
     public Task<int> SaveChangesAsync(CancellationToken cancellationToken = default) => Task.FromResult(SaveChanges());
+
+    public ValueTask<TEntity?> SingleOrDefaultAsync(ISpecification<TEntity> specification, CancellationToken cancellationToken = default)
+    {
+        throw new NotImplementedException();
+    }
+
+    public ValueTask<TEntity?> FirstOrDefaultAsync(ISpecification<TEntity> specification, CancellationToken cancellationToken = default)
+    {
+        throw new NotImplementedException();
+    }
+
+    public ValueTask<List<TEntity>> ListAsync(CancellationToken cancellationToken = default)
+    {
+        throw new NotImplementedException();
+    }
+
+    public ValueTask<List<TEntity>> ListAsync(ISpecification<TEntity> specification, CancellationToken cancellationToken = default)
+    {
+        throw new NotImplementedException();
+    }
+
+    public ValueTask<int> AnyAsync(CancellationToken cancellationToken = default)
+    {
+        throw new NotImplementedException();
+    }
+
+    public ValueTask<int> AnyAsync(ISpecification<TEntity> specification, CancellationToken cancellationToken = default)
+    {
+        throw new NotImplementedException();
+    }
+
+    public ValueTask<int> CountAsync(CancellationToken cancellationToken = default)
+    {
+        throw new NotImplementedException();
+    }
+
+    public ValueTask<int> CountAsync(ISpecification<TEntity> specification, CancellationToken cancellationToken = default)
+    {
+        throw new NotImplementedException();
+    }
+
 }
 
 
