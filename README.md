@@ -128,3 +128,4 @@ An example of how the use of the class is contained in the **ATech.Repository.Te
 
 - 2.0.0.0 - 2.0 package refactoring
 - 1.3.0.0 - Migration to .NET 8
+- 3.0.0 - Migration to .NET 9 and 
