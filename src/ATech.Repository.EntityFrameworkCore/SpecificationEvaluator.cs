@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 
 using Microsoft.EntityFrameworkCore;
@@ -8,7 +9,9 @@ public class SpecificationEvaluator<TEntity> where TEntity : class
 {
     public static IQueryable<TEntity> GetQuery(IQueryable<TEntity> inputQuery, ISpecification<TEntity> specification)
     {
-        var query = inputQuery;
+        ArgumentNullException.ThrowIfNull(specification, nameof(specification));
+
+        IQueryable<TEntity> query = inputQuery;
         
         if (specification.Criteria is not null)
         {

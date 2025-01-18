@@ -1,21 +1,10 @@
 <Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
-    <Nullable>enable</Nullable>
-    <Authors>Maurizio Attanasi</Authors>
-    <Version>3.0.0</Version>
-    <Description>Dapper implementation for the repository pattern</Description>
-    <PackageReleaseNotes>Added specification support</PackageReleaseNotes>
-    <PackageProjectUrl>https://github.com/maurizioattanasi/ATech.Repository</PackageProjectUrl>
-    <PackageReadmeFile>README.md</PackageReadmeFile>
-    <Copyright>Maurizio Attanasi</Copyright>
-  </PropertyGroup>
   <ItemGroup>
     <None Include="../../README.md" Pack="true" PackagePath="\" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Dapper" Version="2.1.35" />
-    <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
+    <PackageReference Include="Dapper" />
+    <PackageReference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ATech.Repository\ATech.Repository.csproj" />

@@ -4,7 +4,8 @@ using System.Data;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using ATech.Repository;
+
+
 using ATech.Repository.Dapper.Extensions;
 
 namespace ATech.Repository.Dapper;
@@ -20,44 +21,34 @@ public class Repository<TEntity, TId> : IRepository<TEntity, TId> where TEntity 
         => _connection.Get<TEntity, TId>(id);
 
     public async ValueTask<TEntity?> GetByIdAsync(TId id, CancellationToken cancellationToken)
-        => await _connection.GetAsync<TEntity, TId>(id, cancellationToken);
+        => await _connection.GetAsync<TEntity, TId>(id).ConfigureAwait(false);
 
     public IQueryable<TEntity> GetAll()
         => _connection.GetAll<TEntity>().AsQueryable();
 
     public async ValueTask<IQueryable<TEntity>> GetAllAsync(CancellationToken cancellationToken)
-        => (await _connection.GetAllAsync<TEntity>(cancellationToken)).AsQueryable();
+        => (await _connection.GetAllAsync<TEntity>().ConfigureAwait(false)).AsQueryable();
 
     public IEnumerable<TEntity> Missing(IEnumerable<TEntity> toExclude, IEqualityComparer<TEntity>? comparer)
         => toExclude.Except(_connection.GetAll<TEntity>(), comparer);
 
     public void Add(TEntity entity)
-    {
-        if (entity is null)
-        {
-            throw new ArgumentNullException(nameof(entity), "Entity cannot be null.");
-        }
-
-        _connection.Insert<TEntity>(entity);
-    }
+        => _connection.Insert<TEntity>(entity);
 
     public async ValueTask AddAsync(TEntity entity, CancellationToken cancellationToken)
-    {
-        if (entity is null)
-        {
-            throw new ArgumentNullException(nameof(entity), "Entity cannot be null.");
-        }
-
-        await _connection.InsertAsync<TEntity>(entity);
-    }
+        => await _connection.InsertAsync<TEntity>(entity).ConfigureAwait(false);
 
     public void AddRange(IEnumerable<TEntity> entities)
     {
         if (entities != null)
         {
-            foreach (var e in entities)
+            foreach (TEntity? e in entities)
             {
-                if(e is null) continue;
+                if (e is null)
+                {
+                    continue;
+                }
+
                 _connection.Insert<TEntity>(e);
             }
         }
@@ -70,46 +61,29 @@ public class Repository<TEntity, TId> : IRepository<TEntity, TId> where TEntity 
     }
 
     public void Remove(TEntity entity)
-    {
-        if (entity is null)
-        {
-            throw new ArgumentNullException(nameof(entity), "Entity cannot be null.");
-        }
-
-        _connection.Delete<TEntity>(entity);
-    }
+        => _connection.Delete<TEntity>(entity);
 
     public void RemoveRange(IEnumerable<TEntity> entities)
     {
         if (entities != null)
         {
-            foreach (var e in entities)
+            foreach (TEntity? e in entities)
             {
-                if(e is null) continue;
+                if (e is null)
+                {
+                    continue;
+                }
+
                 _connection.Delete<TEntity>(e);
             }
         }
     }
 
     public void Update(TEntity entity)
-    {
-        if (entity is null)
-        {
-            throw new ArgumentNullException(nameof(entity), "Entity cannot be null.");
-        }
-
-        _connection.Update<TEntity>(entity);
-    }
+        => _connection.Update<TEntity>(entity);
 
     public async ValueTask UpdateAsync(TEntity entity, CancellationToken cancellationToken)
-    {
-        if (entity is null)
-        {
-            throw new ArgumentNullException(nameof(entity), "Entity cannot be null.");
-        }
-
-        await _connection.UpdateAsync<TEntity>(entity, cancellationToken);
-    }
+        => await _connection.UpdateAsync<TEntity>(entity).ConfigureAwait(false);
 
     public int Count()
         => _connection.Count<TEntity>();
@@ -118,45 +92,21 @@ public class Repository<TEntity, TId> : IRepository<TEntity, TId> where TEntity 
 
     public Task<int> SaveChangesAsync(CancellationToken cancellationToken = default) => Task.FromResult(SaveChanges());
 
-    public ValueTask<TEntity?> SingleOrDefaultAsync(ISpecification<TEntity> specification, CancellationToken cancellationToken = default)
-    {
-        throw new NotImplementedException();
-    }
+    public ValueTask<TEntity?> SingleOrDefaultAsync(ISpecification<TEntity> specification, CancellationToken cancellationToken = default) => throw new NotImplementedException();
 
-    public ValueTask<TEntity?> FirstOrDefaultAsync(ISpecification<TEntity> specification, CancellationToken cancellationToken = default)
-    {
-        throw new NotImplementedException();
-    }
+    public ValueTask<TEntity?> FirstOrDefaultAsync(ISpecification<TEntity> specification, CancellationToken cancellationToken = default) => throw new NotImplementedException();
 
-    public ValueTask<List<TEntity>> ListAsync(CancellationToken cancellationToken = default)
-    {
-        throw new NotImplementedException();
-    }
+    public ValueTask<List<TEntity>> ListAsync(CancellationToken cancellationToken = default) => throw new NotImplementedException();
 
-    public ValueTask<List<TEntity>> ListAsync(ISpecification<TEntity> specification, CancellationToken cancellationToken = default)
-    {
-        throw new NotImplementedException();
-    }
+    public ValueTask<List<TEntity>> ListAsync(ISpecification<TEntity> specification, CancellationToken cancellationToken = default) => throw new NotImplementedException();
 
-    public ValueTask<bool> AnyAsync(CancellationToken cancellationToken = default)
-    {
-        throw new NotImplementedException();
-    }
+    public ValueTask<bool> AnyAsync(CancellationToken cancellationToken = default) => throw new NotImplementedException();
 
-    public ValueTask<bool> AnyAsync(ISpecification<TEntity> specification, CancellationToken cancellationToken = default)
-    {
-        throw new NotImplementedException();
-    }
+    public ValueTask<bool> AnyAsync(ISpecification<TEntity> specification, CancellationToken cancellationToken = default) => throw new NotImplementedException();
 
-    public ValueTask<int> CountAsync(CancellationToken cancellationToken = default)
-    {
-        throw new NotImplementedException();
-    }
+    public ValueTask<int> CountAsync(CancellationToken cancellationToken = default) => throw new NotImplementedException();
 
-    public ValueTask<int> CountAsync(ISpecification<TEntity> specification, CancellationToken cancellationToken = default)
-    {
-        throw new NotImplementedException();
-    }
+    public ValueTask<int> CountAsync(ISpecification<TEntity> specification, CancellationToken cancellationToken = default) => throw new NotImplementedException();
 
 }
 

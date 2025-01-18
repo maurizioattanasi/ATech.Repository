@@ -10,7 +10,7 @@ namespace ATech.Repository.EntityFrameworkCore;
 
 public class Repository<TEntity, TId> : IRepository<TEntity, TId> where TEntity : class
 {
-    public readonly DbContext _context;
+    private readonly DbContext _context;
 
     public Repository(DbContext context)
         => _context = context;
@@ -27,7 +27,7 @@ public class Repository<TEntity, TId> : IRepository<TEntity, TId> where TEntity 
             throw new ArgumentNullException(nameof(id), "Id cannot be null.");
         }
 
-        return await _context.Set<TEntity>().FindAsync(new object[] { id }, cancellationToken);
+        return await _context.Set<TEntity>().FindAsync(new object[] { id }, cancellationToken).ConfigureAwait(false);
     }
 
     /// <inheritdoc/>
@@ -36,7 +36,7 @@ public class Repository<TEntity, TId> : IRepository<TEntity, TId> where TEntity 
 
     /// <inheritdoc/>
     public virtual async ValueTask<IQueryable<TEntity>> GetAllAsync(CancellationToken cancellationToken)
-        => await Task.Run(() => _context.Set<TEntity>(), cancellationToken);
+        => await Task.Run(() => _context.Set<TEntity>(), cancellationToken).ConfigureAwait(false);
 
     /// <inheritdoc/>
     public IEnumerable<TEntity> Missing(IEnumerable<TEntity> toExclude, IEqualityComparer<TEntity>? comparer)
@@ -48,7 +48,7 @@ public class Repository<TEntity, TId> : IRepository<TEntity, TId> where TEntity 
 
     /// <inheritdoc/>
     public virtual async ValueTask AddAsync(TEntity entity, CancellationToken cancellationToken)
-        => await _context.Set<TEntity>().AddAsync(entity, cancellationToken);
+        => await _context.Set<TEntity>().AddAsync(entity, cancellationToken).ConfigureAwait(false);
 
     /// <inheritdoc/>
     public virtual void AddRange(IEnumerable<TEntity> entities)
@@ -56,7 +56,7 @@ public class Repository<TEntity, TId> : IRepository<TEntity, TId> where TEntity 
 
     /// <inheritdoc/>
     public virtual async ValueTask AddRangeAsync(IEnumerable<TEntity> entities, CancellationToken cancellationToken = default)
-        => await _context.Set<TEntity>().AddRangeAsync(entities, cancellationToken);
+        => await _context.Set<TEntity>().AddRangeAsync(entities, cancellationToken).ConfigureAwait(false);
 
     /// <inheritdoc/>
     public virtual void Remove(TEntity entity)
@@ -72,11 +72,11 @@ public class Repository<TEntity, TId> : IRepository<TEntity, TId> where TEntity 
 
     /// <inheritdoc/>
     public async ValueTask<int> CountAsync(CancellationToken cancellationToken = default)
-        => await _context.Set<TEntity>().CountAsync(cancellationToken);
+        => await _context.Set<TEntity>().CountAsync(cancellationToken).ConfigureAwait(false);
 
     /// <inheritdoc/>
     public async ValueTask<int> CountAsync(ISpecification<TEntity> specification, CancellationToken cancellationToken = default)
-        => await SpecificationEvaluator<TEntity>.GetQuery(_context.Set<TEntity>().AsQueryable(), specification).CountAsync(cancellationToken);
+        => await SpecificationEvaluator<TEntity>.GetQuery(_context.Set<TEntity>().AsQueryable(), specification).CountAsync(cancellationToken).ConfigureAwait(false);
 
     /// <inheritdoc/>
     public void Update(TEntity entity)
@@ -84,35 +84,35 @@ public class Repository<TEntity, TId> : IRepository<TEntity, TId> where TEntity 
 
     /// <inheritdoc/>
     public async ValueTask UpdateAsync(TEntity entity, CancellationToken cancellationToken)
-        => await Task.Run(() => _context.Set<TEntity>().Update(entity), cancellationToken);
+        => await Task.Run(() => _context.Set<TEntity>().Update(entity), cancellationToken).ConfigureAwait(false);
 
     /// <inheritdoc/>
     public int SaveChanges() => _context.SaveChanges();
 
     /// <inheritdoc/>
-    public async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default) => await _context.SaveChangesAsync(cancellationToken);
+    public async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default) => await _context.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
 
     /// <inheritdoc/>
     public async ValueTask<TEntity?> SingleOrDefaultAsync(ISpecification<TEntity> specification, CancellationToken cancellationToken = default)
-        => await SpecificationEvaluator<TEntity>.GetQuery(_context.Set<TEntity>().AsQueryable(), specification).SingleOrDefaultAsync(cancellationToken);
+        => await SpecificationEvaluator<TEntity>.GetQuery(_context.Set<TEntity>().AsQueryable(), specification).SingleOrDefaultAsync(cancellationToken).ConfigureAwait(false);
 
     /// <inheritdoc/>
     public async ValueTask<TEntity?> FirstOrDefaultAsync(ISpecification<TEntity> specification, CancellationToken cancellationToken = default)
-        => await SpecificationEvaluator<TEntity>.GetQuery(_context.Set<TEntity>().AsQueryable(), specification).FirstOrDefaultAsync(cancellationToken);
+        => await SpecificationEvaluator<TEntity>.GetQuery(_context.Set<TEntity>().AsQueryable(), specification).FirstOrDefaultAsync(cancellationToken).ConfigureAwait(false);
 
     /// <inheritdoc/>
     public async ValueTask<List<TEntity>> ListAsync(CancellationToken cancellationToken = default)
-        => await _context.Set<TEntity>().ToListAsync(cancellationToken);
+        => await _context.Set<TEntity>().ToListAsync(cancellationToken).ConfigureAwait(false);
 
     /// <inheritdoc/>
     public async ValueTask<List<TEntity>> ListAsync(ISpecification<TEntity> specification, CancellationToken cancellationToken = default)
-       => await SpecificationEvaluator<TEntity>.GetQuery(_context.Set<TEntity>().AsQueryable(), specification).ToListAsync(cancellationToken);
+       => await SpecificationEvaluator<TEntity>.GetQuery(_context.Set<TEntity>().AsQueryable(), specification).ToListAsync(cancellationToken).ConfigureAwait(false);
 
     /// <inheritdoc/>
     public async ValueTask<bool> AnyAsync(CancellationToken cancellationToken = default)
-         => await _context.Set<TEntity>().AnyAsync(cancellationToken);
+         => await _context.Set<TEntity>().AnyAsync(cancellationToken).ConfigureAwait(false);
 
     /// <inheritdoc/>
     public async ValueTask<bool> AnyAsync(ISpecification<TEntity> specification, CancellationToken cancellationToken = default)
-       => await SpecificationEvaluator<TEntity>.GetQuery(_context.Set<TEntity>().AsQueryable(), specification).AnyAsync(cancellationToken);
+       => await SpecificationEvaluator<TEntity>.GetQuery(_context.Set<TEntity>().AsQueryable(), specification).AnyAsync(cancellationToken).ConfigureAwait(false);
 }

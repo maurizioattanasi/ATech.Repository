@@ -4,7 +4,7 @@ using ATech.Repository.Test.Repository;
 
 namespace ATech.Repository.Test.EntityFrameworkCore.Repositories;
 
-public class PhysicalDimensionRepository(AppDbContext context) : Repository<PhysicalDimension, long>(context), IPhysicalDimensionRepository
+internal sealed class PhysicalDimensionRepository(AppDbContext context) : Repository<PhysicalDimension, long>(context), IPhysicalDimensionRepository
 {
 }
 

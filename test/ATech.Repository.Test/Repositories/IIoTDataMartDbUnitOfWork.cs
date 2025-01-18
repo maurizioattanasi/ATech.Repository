@@ -4,7 +4,7 @@ using ATech.Repository.Test.Repositories;
 
 namespace ATech.Repository.Test.Repository;
 
-public interface IIoTDataMartDbUnitOfWork : IDisposable
+internal interface IIoTDataMartDbUnitOfWork : IDisposable
 {
     IPhysicalDimensionRepository PhysicalDimensions { get; }
 

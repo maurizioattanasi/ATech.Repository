@@ -27,7 +27,7 @@ public class EntityFrameworkCoreInMemoryRepositoryTest
     public async Task CRUDTest()
     {
         // Arrange
-        var options = new DbContextOptionsBuilder<AppDbContext>()
+        DbContextOptions<AppDbContext> options = new DbContextOptionsBuilder<AppDbContext>()
             .UseInMemoryDatabase("MyInMemoryDatabase")
             .Options;
 
@@ -35,7 +35,7 @@ public class EntityFrameworkCoreInMemoryRepositoryTest
 
         var physicalDimensionRepository = new PhysicalDimensionRepository(context);
 
-        var physicalDimensionsCount = await physicalDimensionRepository.CountAsync(_cancellationToken);
+        int physicalDimensionsCount = await physicalDimensionRepository.CountAsync(_cancellationToken);
 
         Assert.Equal(0, physicalDimensionsCount);
 
@@ -55,7 +55,7 @@ public class EntityFrameworkCoreInMemoryRepositoryTest
 
         Assert.Equal(1, physicalDimensionsCount);
 
-        var humidityPhysicalDimension = await physicalDimensionRepository
+        PhysicalDimension? humidityPhysicalDimension = await physicalDimensionRepository
             .FirstOrDefaultAsync(new GetPhysicalDimensionByNameSpecification("Temperature"), _cancellationToken);
 
         Assert.NotNull(humidityPhysicalDimension);
@@ -73,7 +73,7 @@ public class EntityFrameworkCoreInMemoryRepositoryTest
 
         Assert.True(await physicalDimensionRepository.AnyAsync(_cancellationToken));
 
-        var allPhysicalDimensions = await physicalDimensionRepository.ListAsync(_cancellationToken);
+        System.Collections.Generic.List<PhysicalDimension> allPhysicalDimensions = await physicalDimensionRepository.ListAsync(_cancellationToken);
 
         Assert.Equal(2, allPhysicalDimensions.Count);
 
@@ -83,19 +83,19 @@ public class EntityFrameworkCoreInMemoryRepositoryTest
 
         Assert.Single(allPhysicalDimensions);
 
-        var orderedByNamePhysicalDimensions = await physicalDimensionRepository.ListAsync(new OrderPhysicalDimensionByNameSpecification(), _cancellationToken);
+        System.Collections.Generic.List<PhysicalDimension> orderedByNamePhysicalDimensions = await physicalDimensionRepository.ListAsync(new OrderPhysicalDimensionByNameSpecification(), _cancellationToken);
 
         Assert.Equal(2, await physicalDimensionRepository.CountAsync(new OrderPhysicalDimensionByNameSpecification(), _cancellationToken));
 
         Assert.Equal("Humidity", orderedByNamePhysicalDimensions[0].Name);
 
-        var orderedByNameDescPhysicalDimensions = await physicalDimensionRepository.ListAsync(new OrderPhysicalDimensionByNameDescendingSpecification(), _cancellationToken);
+        System.Collections.Generic.List<PhysicalDimension> orderedByNameDescPhysicalDimensions = await physicalDimensionRepository.ListAsync(new OrderPhysicalDimensionByNameDescendingSpecification(), _cancellationToken);
 
         Assert.Equal("Temperature", orderedByNameDescPhysicalDimensions[0].Name);
 
         Assert.Equal(2, await physicalDimensionRepository.CountAsync(new OrderPhysicalDimensionByNameDescendingSpecification(), _cancellationToken));
 
-        var paginatedPhysicalDimensions = await physicalDimensionRepository.ListAsync(new PaginationSpecification(2, 1), _cancellationToken);
+        System.Collections.Generic.List<PhysicalDimension> paginatedPhysicalDimensions = await physicalDimensionRepository.ListAsync(new PaginationSpecification(2, 1), _cancellationToken);
 
         Assert.Single(paginatedPhysicalDimensions);
 
@@ -107,7 +107,8 @@ public class EntityFrameworkCoreInMemoryRepositoryTest
             Make = "Maker",
             Model = "Model one",
             SerialNumber = "Serial number one",
-            PhysicalDimension = await physicalDimensionRepository.FirstOrDefaultAsync(new GetPhysicalDimensionByNameSpecification("Temperature"), _cancellationToken),
+            PhysicalDimension = await physicalDimensionRepository.FirstOrDefaultAsync(new GetPhysicalDimensionByNameSpecification("Temperature"), _cancellationToken)
+                                 ?? throw new InvalidOperationException("PhysicalDimension not found"),
             Created = DateTime.UtcNow,
             CreatedBy = "atech"
         };
@@ -115,7 +116,7 @@ public class EntityFrameworkCoreInMemoryRepositoryTest
         await sensorRepository.AddAsync(sensor, _cancellationToken);
         await sensorRepository.SaveChangesAsync(_cancellationToken);
 
-        var sensors = await sensorRepository.ListAsync(new GetSensorByNameWithPhysicalDimensionSpecification("TemperatureSensor"), _cancellationToken);
+        System.Collections.Generic.List<Sensor> sensors = await sensorRepository.ListAsync(new GetSensorByNameWithPhysicalDimensionSpecification("TemperatureSensor"), _cancellationToken);
         Assert.True(sensors.Count > 0);
 
         Assert.NotNull(sensors[0].PhysicalDimension);

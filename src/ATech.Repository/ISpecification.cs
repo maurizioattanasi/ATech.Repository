@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq.Expressions;
 
 namespace ATech.Repository;
@@ -15,7 +16,7 @@ public interface ISpecification<TEntity> where TEntity : class
     /// This list is used to specify the related entities to be included in the query results.
     /// By including related entities, you can reduce the number of database queries and improve performance.
     /// </remarks>
-    List<Expression<Func<TEntity, object>>> Includes { get; }
+    ReadOnlyCollection<Expression<Func<TEntity, object>>> Includes { get; }
 
     // List<string> IncludeStrings { get; }
 

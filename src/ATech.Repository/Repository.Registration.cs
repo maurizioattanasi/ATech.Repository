@@ -10,6 +10,8 @@ public static class RepositoryRegistration
 {
     public static IServiceCollection AddRepositories(this IServiceCollection services, Assembly assembly)
     {
+        ArgumentNullException.ThrowIfNull(assembly, nameof(assembly));
+
         // Find all classes that implement IRepository<,> (directly or through descendant interfaces)
         var repositoryTypes = assembly.GetTypes()
             .Where(t => !t.IsInterface && !t.IsAbstract) // Non-interface and non-abstract
@@ -28,11 +30,15 @@ public static class RepositoryRegistration
     private static bool IsAssignableToGenericType(Type givenType, Type genericType)
     {
         if (!genericType.IsGenericType)
+        {
             return false;
+        }
 
         // Check direct assignment
         if (givenType.IsGenericType && givenType.GetGenericTypeDefinition() == genericType)
+        {
             return true;
+        }
 
         // Check all implemented interfaces
         return givenType.GetInterfaces()

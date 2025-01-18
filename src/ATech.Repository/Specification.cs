@@ -1,29 +1,31 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq.Expressions;
 
 namespace ATech.Repository;
 
 public abstract class Specification<TEntity> : ISpecification<TEntity> where TEntity : class
 {
-    public Specification()
-    {
-    }
+    private readonly List<Expression<Func<TEntity, object>>> _includes = new();
 
-    public Specification(int? skip = null, int? take = null)
+    protected Specification() 
+        => Includes = new ReadOnlyCollection<Expression<Func<TEntity, object>>>(_includes);
+
+    protected Specification(int? skip = null, int? take = null) : this()
     {
         Skip = skip;
         Take = take;
     }
 
-    public Specification(Expression<Func<TEntity, bool>> criteria)
+    protected Specification(Expression<Func<TEntity, bool>> criteria) : this() 
         => Criteria = criteria;
 
+    public ReadOnlyCollection<Expression<Func<TEntity, object>>> Includes { get; internal set; }
     /// <inheritdoc/>
     public Expression<Func<TEntity, bool>> Criteria { get; init; } = null!;
 
     /// <inheritdoc/>
-    public List<Expression<Func<TEntity, object>>> Includes { get; } = new();
 
     /// <inheritdoc/>
     public Expression<Func<TEntity, object>> OrderBy { get; private set; } = null!;
@@ -39,7 +41,7 @@ public abstract class Specification<TEntity> : ISpecification<TEntity> where TEn
 
     /// <inheritdoc/>
     protected void AddInclude(Expression<Func<TEntity, object>> includeExpression)
-        => Includes.Add(includeExpression);
+        => _includes.Add(includeExpression);
 
     protected void AddOrderBy(Expression<Func<TEntity, object>> orderby)
         => OrderBy = orderby;

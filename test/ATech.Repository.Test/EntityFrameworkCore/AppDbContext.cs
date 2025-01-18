@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ATech.Repository.Test.EntityFrameworkCore;
 
-public class AppDbContext(DbContextOptions options) : DbContext(options)
+internal sealed class AppDbContext(DbContextOptions options) : DbContext(options)
 {
     public DbSet<Measure> Measures { get; set; }
     public DbSet<PhysicalDimension> PhysicalDimensions { get; set; }
