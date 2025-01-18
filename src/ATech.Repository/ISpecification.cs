@@ -18,8 +18,6 @@ public interface ISpecification<TEntity> where TEntity : class
     /// </remarks>
     ReadOnlyCollection<Expression<Func<TEntity, object>>> Includes { get; }
 
-    // List<string> IncludeStrings { get; }
-
     /// <summary>
     /// Gets the expression to order the entities in ascending order.
     /// </summary>

@@ -20,7 +20,7 @@ public class Repository<TEntity, TId> : IRepository<TEntity, TId> where TEntity 
     public TEntity? GetById(TId id)
         => _connection.Get<TEntity, TId>(id);
 
-    public async ValueTask<TEntity?> GetByIdAsync(TId id, CancellationToken cancellationToken)
+    public async ValueTask<TEntity?> GetByIdAsync(TId id, CancellationToken cancellationToken = default)
         => await _connection.GetAsync<TEntity, TId>(id).ConfigureAwait(false);
 
     public IQueryable<TEntity> GetAll()

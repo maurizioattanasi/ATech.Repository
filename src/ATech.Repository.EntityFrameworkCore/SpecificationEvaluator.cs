@@ -5,11 +5,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ATech.Repository.EntityFrameworkCore;
 
-public class SpecificationEvaluator<TEntity> where TEntity : class
+public static class SpecificationEvaluator<TEntity> where TEntity : class
 {
     public static IQueryable<TEntity> GetQuery(IQueryable<TEntity> inputQuery, ISpecification<TEntity> specification)
     {
-        ArgumentNullException.ThrowIfNull(specification, nameof(specification));
+        ArgumentNullException.ThrowIfNull(specification);
 
         IQueryable<TEntity> query = inputQuery;
         

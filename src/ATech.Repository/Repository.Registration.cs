@@ -10,7 +10,7 @@ public static class RepositoryRegistration
 {
     public static IServiceCollection AddRepositories(this IServiceCollection services, Assembly assembly)
     {
-        ArgumentNullException.ThrowIfNull(assembly, nameof(assembly));
+        ArgumentNullException.ThrowIfNull(assembly);
 
         // Find all classes that implement IRepository<,> (directly or through descendant interfaces)
         var repositoryTypes = assembly.GetTypes()

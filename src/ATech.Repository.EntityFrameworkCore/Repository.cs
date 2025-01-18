@@ -20,7 +20,7 @@ public class Repository<TEntity, TId> : IRepository<TEntity, TId> where TEntity 
         => _context.Set<TEntity>().Find(id);
 
     /// <inheritdoc/>
-    public virtual async ValueTask<TEntity?> GetByIdAsync(TId id, CancellationToken cancellationToken)
+    public virtual async ValueTask<TEntity?> GetByIdAsync(TId id, CancellationToken cancellationToken = default)
     {
         if (id is null)
         {

@@ -12,7 +12,7 @@ public abstract class Specification<TEntity> : ISpecification<TEntity> where TEn
     protected Specification() 
         => Includes = new ReadOnlyCollection<Expression<Func<TEntity, object>>>(_includes);
 
-    protected Specification(int? skip = null, int? take = null) : this()
+    protected Specification(int? skip, int? take) : this()
     {
         Skip = skip;
         Take = take;

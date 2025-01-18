@@ -65,7 +65,11 @@ public static class DapperExtensions
         PropertyInfo[] propertyInfos = entity.GetType().GetProperties();
         string[] columns = propertyInfos.Where(p => p.Name.Equals("id", StringComparison.OrdinalIgnoreCase)).Select(p => p.Name).ToArray();
 
+#pragma warning disable S1481 // Unused local variables should be removed
+
         var parameters = columns.Select(name => name + "=@" + name).ToList();
+#pragma warning restore S1481 // Unused local variables should be removed
+
 
         string query = string.Format(CultureInfo.InvariantCulture, "DELETE FROM {0} WHERE Id=@Id", tableName);
 
