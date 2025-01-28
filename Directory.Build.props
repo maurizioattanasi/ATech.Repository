@@ -3,10 +3,10 @@
         <TargetFramework>net9.0</TargetFramework>
         <Nullable>enable</Nullable>
         <Authors>Maurizio Attanasi</Authors>
-        <Version>3.0.0</Version>
+        <Version>3.0.1</Version>
         <Description>A generic implementation for the repository pattern in C#</Description>
         <PackageReadmeFile>README.md</PackageReadmeFile>
-        <PackageReleaseNotes>Added specification support</PackageReleaseNotes>
+        <PackageReleaseNotes>Added expression extensions</PackageReleaseNotes>
         <PackageProjectUrl>https://github.com/maurizioattanasi/ATech.Repository</PackageProjectUrl>
         <Copyright>Maurizio Attanasi</Copyright>
         <NoWarn>CA1000,CA1862,CA1724,CA1052</NoWarn>
