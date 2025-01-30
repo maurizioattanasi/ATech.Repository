@@ -40,7 +40,11 @@ public static class SpecificationEvaluator<TEntity> where TEntity : class
 
         query = specification.Includes.Aggregate(query, (current, include) => current.Include(include));
 
+        if (specification.AsNoTracking)
+        {
+            query = query.AsNoTracking();
+        }
+
         return query;
     }
 }
-

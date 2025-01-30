@@ -3,7 +3,7 @@
         <TargetFramework>net9.0</TargetFramework>
         <Nullable>enable</Nullable>
         <Authors>Maurizio Attanasi</Authors>
-        <Version>3.0.1</Version>
+        <Version>3.0.2</Version>
         <Description>A generic implementation for the repository pattern in C#</Description>
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <PackageReleaseNotes>Added expression extensions</PackageReleaseNotes>
