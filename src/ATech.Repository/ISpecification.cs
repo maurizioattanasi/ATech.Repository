@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq.Expressions;
 
@@ -44,5 +43,10 @@ public interface ISpecification<TEntity> where TEntity : class
     /// The number of elements to skip before returning the remaining elements.
     /// </summary>
     int? Skip { get; }
+
+    /// <summary>
+    /// Indicates whether the query should be executed with "AsNoTracking" option.
+    /// </summary>
+    bool AsNoTracking { get; }
 }
 

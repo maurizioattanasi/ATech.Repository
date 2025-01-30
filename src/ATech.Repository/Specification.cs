@@ -9,7 +9,7 @@ public abstract class Specification<TEntity> : ISpecification<TEntity> where TEn
 {
     private readonly List<Expression<Func<TEntity, object>>> _includes = new();
 
-    protected Specification() 
+    protected Specification()
         => Includes = new ReadOnlyCollection<Expression<Func<TEntity, object>>>(_includes);
 
     protected Specification(int? skip, int? take) : this()
@@ -18,7 +18,7 @@ public abstract class Specification<TEntity> : ISpecification<TEntity> where TEn
         Take = take;
     }
 
-    protected Specification(Expression<Func<TEntity, bool>> criteria) : this() 
+    protected Specification(Expression<Func<TEntity, bool>> criteria) : this()
         => Criteria = criteria;
 
     public ReadOnlyCollection<Expression<Func<TEntity, object>>> Includes { get; internal set; }
@@ -40,13 +40,22 @@ public abstract class Specification<TEntity> : ISpecification<TEntity> where TEn
     public int? Skip { get; private set; }
 
     /// <inheritdoc/>
+    public bool AsNoTracking { get; private set; }
+
+    /// <inheritdoc/>
     protected void AddInclude(Expression<Func<TEntity, object>> includeExpression)
         => _includes.Add(includeExpression);
 
+    /// <inheritdoc/>
     protected void AddOrderBy(Expression<Func<TEntity, object>> orderby)
         => OrderBy = orderby;
 
+    /// <inheritdoc/>
     protected void AddOrderByDescending(Expression<Func<TEntity, object>> orderbyDescending)
         => OrderByDescending = orderbyDescending;
+
+    /// <inheritdoc/>
+    protected void ApplyNoTracking()
+        => AsNoTracking = true;
 }
 
