@@ -20,15 +20,8 @@ public class Repository<TEntity, TId> : IRepository<TEntity, TId> where TEntity 
         => _context.Set<TEntity>().Find(id);
 
     /// <inheritdoc/>
-    public virtual async ValueTask<TEntity?> GetByIdAsync(TId id, CancellationToken cancellationToken = default)
-    {
-        if (id is null)
-        {
-            throw new ArgumentNullException(nameof(id), "Id cannot be null.");
-        }
-
-        return await _context.Set<TEntity>().FindAsync(new object[] { id }, cancellationToken).ConfigureAwait(false);
-    }
+    public virtual async ValueTask<TEntity?> GetByIdAsync(TId id, CancellationToken cancellationToken = default) 
+        => await Task.Run(() => GetById(id), cancellationToken).ConfigureAwait(false);
 
     /// <inheritdoc/>
     public virtual IQueryable<TEntity> GetAll()
@@ -80,11 +73,25 @@ public class Repository<TEntity, TId> : IRepository<TEntity, TId> where TEntity 
 
     /// <inheritdoc/>
     public void Update(TEntity entity)
-        => _context.Set<TEntity>().Update(entity);
+    {
+        TEntity? trackedEntity = _context.Set<TEntity>().Local
+            .FirstOrDefault(e =>
+                _context.Entry(e).Property("Id").CurrentValue!.Equals(_context.Entry(entity).Property("Id").CurrentValue)
+            );
+        if (trackedEntity != null)
+        {
+            _context.Entry(trackedEntity).CurrentValues.SetValues(entity);
+        }
+        else
+        {
+            _context.Attach(entity);
+            _context.Entry(entity).State = EntityState.Modified;
+        }
+    }
 
     /// <inheritdoc/>
-    public async ValueTask UpdateAsync(TEntity entity, CancellationToken cancellationToken)
-        => await Task.Run(() => _context.Set<TEntity>().Update(entity), cancellationToken).ConfigureAwait(false);
+    public async ValueTask UpdateAsync(TEntity entity, CancellationToken cancellationToken) 
+        => await Task.Run(() => Update(entity), cancellationToken).ConfigureAwait(false);
 
     /// <inheritdoc/>
     public int SaveChanges() => _context.SaveChanges();
