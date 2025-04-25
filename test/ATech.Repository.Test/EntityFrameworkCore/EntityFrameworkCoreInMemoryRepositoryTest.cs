@@ -121,5 +121,36 @@ public class EntityFrameworkCoreInMemoryRepositoryTest
 
         Assert.NotNull(sensors[0].PhysicalDimension);
         Assert.Equal("Temperature", sensors[0].PhysicalDimension.Name);
+
+        // Update the sensor
+        var sensorId = sensors[0].Id;
+        var sensorToUpdate = await sensorRepository.FirstOrDefaultAsync(new SensorByIdSpecification(sensorId), _cancellationToken);
+
+        Assert.NotNull(sensorToUpdate);
+
+        sensorToUpdate.Name = "UpdatedSensorName";
+        sensorToUpdate.Make = "UpdatedMake";
+        sensorToUpdate.Model = "UpdatedModel";
+        sensorToUpdate.SerialNumber = "UpdatedSerialNumber";
+
+        await sensorRepository.UpdateAsync(sensorToUpdate, _cancellationToken);
+        await sensorRepository.SaveChangesAsync(_cancellationToken);
+
+        var updatedSensor = await sensorRepository.FirstOrDefaultAsync(new SensorByIdSpecification(sensorId), _cancellationToken);
+        Assert.NotNull(updatedSensor);
+        Assert.Equal("UpdatedSensorName", updatedSensor.Name);
+        Assert.Equal("UpdatedMake", updatedSensor.Make);
+        Assert.Equal("UpdatedModel", updatedSensor.Model);
+        Assert.Equal("UpdatedSerialNumber", updatedSensor.SerialNumber);
     }
+}
+
+internal sealed class SensorByIdSpecification : Specification<Sensor>
+{
+    public SensorByIdSpecification(int id) : base(criteria: c => true)
+    {
+        Criteria = Criteria.And(c => c.Id == id);
+
+        ApplyNoTracking();
+     }
 }
