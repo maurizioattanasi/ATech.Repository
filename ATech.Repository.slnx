@@ -1,0 +1,15 @@
+<Solution>
+  <Configurations>
+    <Platform Name="Any CPU" />
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Folder Name="/src/">
+    <Project Path="src/ATech.Repository.Dapper/ATech.Repository.Dapper.csproj" />
+    <Project Path="src/ATech.Repository.EntityFrameworkCore/ATech.Repository.EntityFrameworkCore.csproj" />
+    <Project Path="src/ATech.Repository/ATech.Repository.csproj" />
+  </Folder>
+  <Folder Name="/test/">
+    <Project Path="test/ATech.Repository.Test/ATech.Repository.Test.csproj" />
+  </Folder>
+</Solution>
