@@ -11,6 +11,9 @@ jobs:
 
     runs-on: ubuntu-latest
 
+    permissions:
+      id-token: write # enable GitHub OIDC token issuance for this job
+
     steps:
     - uses: actions/checkout@v2
     - name: Setup .NET Core
@@ -30,7 +33,15 @@ jobs:
     - name: Pack ATech.Repository.Dapper
       run: 
         dotnet pack ./src/ATech.Repository.Dapper/ATech.Repository.Dapper.csproj --output nuget-packages --configuration Release
+
+      # Get a short-lived NuGet API key
+    - name: NuGet login (OIDC → temp API key)
+      uses: NuGet/login@v1
+      id: login
+      with:
+        user: ${{ secrets.NUGET_USER }} # Recommended: use a secret like ${{ secrets.NUGET_USER }} for your nuget.org username (profile name), NOT your email address
+  
     - name: Push with dotnet
       run: 
-        dotnet nuget push "**/*.nupkg" --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json --skip-duplicate
+        dotnet nuget push "**/*.nupkg" --api-key ${{ steps.login.outputs.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json --skip-duplicate
 
